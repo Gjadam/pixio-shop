@@ -6,9 +6,12 @@ export default {
   ],
   theme: {
     extend: {
-      borderWidth : {
-        '1' : '1px'
+      borderWidth: {
+        '1': '1px'
       },
+      animation: {
+        'spin-slow': 'spin 25s linear infinite', 
+      }
     },
   },
   plugins: [],
