@@ -14,6 +14,7 @@ import 'swiper/css/effect-creative';
 import { Autoplay, EffectCreative, FreeMode, Parallax } from 'swiper/modules';
 import SwiperButton from '../../Modules/SwiperButton/SwiperButton';
 import SpinnerIcon from '../../Modules/SpinnerIcon/SpinnerIcon';
+import Button from '../../Modules/Button/Button';
 
 export default function Header() {
 
@@ -22,7 +23,6 @@ export default function Header() {
         <div className=" relative  my-16 ">
             <Swiper
                 loop={true}
-                autoplay={true}
                 parallax={true}
                 spaceBetween={-240}
                 grabCursor={true}
@@ -31,19 +31,19 @@ export default function Header() {
                     rotate: 30,
                     slideShadows: true,
                 }}
-                modules={[Parallax, Autoplay, EffectCreative]}
+                modules={[Parallax, EffectCreative]}
                 className="mySwiper3"
             >
                 <SwiperSlide>
                     <div className=" flex justify-around items-center w-full ">
                         <div className=" relative flex justify-center items-start flex-col gap-8 mb-28">
-                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[45rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
+                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[48rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
                             <div className=" flex justify-center items-start flex-col" data-swiper-parallax="-200">
                                 <span>Price</span>
                                 <span className=' text-4xl font-bold'>166$</span>
                             </div>
                             <div className="" data-swiper-parallax="-100">
-                                <span className=' uppercase font-bold rounded-xl bg-black text-white px-8 py-4' >view details</span>
+                                <Button text='view detail' padding='px-8 py-4' />
                             </div>
 
                         </div>
@@ -64,15 +64,14 @@ export default function Header() {
                 <SwiperSlide>
                     <div className=" flex justify-around items-center w-full ">
                         <div className=" relative flex justify-center items-start flex-col gap-8 mb-28">
-                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[45rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
+                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[48rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
                             <div className=" flex justify-center items-start flex-col" data-swiper-parallax="-200">
                                 <span>Price</span>
                                 <span className=' text-4xl font-bold'>166$</span>
                             </div>
                             <div className="" data-swiper-parallax="-100">
-                                <span className=' uppercase font-bold rounded-xl bg-black text-white px-8 py-4' >view details</span>
+                                <Button  text='view detail' padding='px-8 py-4' />
                             </div>
-
                         </div>
                         <div className=" z-50 ">
                             <div className=" w-[32rem]  relative after:absolute after:bg-[url('/images/png/next-btn.png')] after:bg-no-repeat after:w-10 after:h-44 after:right-0 after:bottom-5 ">
@@ -91,15 +90,14 @@ export default function Header() {
                 <SwiperSlide>
                     <div className=" flex justify-around items-center w-full ">
                         <div className=" relative flex justify-center items-start flex-col gap-8 mb-28">
-                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[45rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
+                            <span className=' capitalize font-extrabold text-[5rem] leading-none max-w-[48rem]' data-swiper-parallax="-300">Make your fashion look mire charming</span>
                             <div className=" flex justify-center items-start flex-col" data-swiper-parallax="-200">
                                 <span>Price</span>
                                 <span className=' text-4xl font-bold'>166$</span>
                             </div>
                             <div className="" data-swiper-parallax="-100">
-                                <span className=' uppercase font-bold rounded-xl bg-black text-white px-8 py-4' >view details</span>
+                                <Button  text='view detail' padding='px-8 py-4' />
                             </div>
-
                         </div>
                         <div className=" z-50 ">
                             <div className=" w-[32rem]  relative after:absolute after:bg-[url('/images/png/next-btn.png')] after:bg-no-repeat after:w-10 after:h-44 after:right-0 after:bottom-5 ">
@@ -116,11 +114,11 @@ export default function Header() {
                     </div>
                 </SwiperSlide>
             </Swiper>
-            <div className=" flex justify-center items-center  z-50 absolute left-32 bottom-10">
+            <div className=" flex justify-center items-center  z-50 absolute left-32 bottom-0">
                 <MdEmergency className='text-8xl' />
                 <div className=" flex justify-center items-start flex-col font-bold gap-1">
                     <span className=' text-sm'>Summer Collection</span>
-                    <span className=' max-w-48 '>TRENDY AND CLASSIC FOR THE NEW SEASON</span>
+                    <span className=' max-w-52 text-lg '>TRENDY AND CLASSIC FOR THE NEW SEASON</span>
                 </div>
             </div>
 
