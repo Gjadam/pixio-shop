@@ -23,12 +23,9 @@ export default function NavBar() {
         </div>
       </div>
       <div className=" flex justify-center items-center gap-12">
-        <div className="rounded-full bg-amber-400 py-2  text-white ">
-          <a href="" className='py-2 px-2.5'>
-            <span>Login</span>
-          </a>
-          <a href="" className=' bg-rose-600 w-full p-2.5 rounded-full'>
-            <span>Register</span>
+        <div className=" ">
+          <a href="" className=''>
+            <span>Login/Register</span>
           </a>
         </div>
         <div className="flex justify-center items-center gap-5 text-xl">
@@ -36,7 +33,7 @@ export default function NavBar() {
         <RiHeart2Line className=' cursor-pointer' />
         <div className=" relative cursor-pointer">
         <MdOutlineShoppingCart className=' ' />
-        <span className=' absolute -right-4 bottom-3 text-white bg-rose-600 rounded-full px-1.5 py-0.5 text-xs'>5</span>
+        <span className=' absolute -right-4 bottom-3 text-white bg-purple-600 rounded-full px-1.5 py-0.5 text-xs'>5</span>
         </div>
         </div>
       </div>
