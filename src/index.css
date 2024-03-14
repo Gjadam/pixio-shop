@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .font-outline-1 {
+    -webkit-text-stroke: 1px black;
+  }
+}
+
+@layer utilities {
+  .mask {
+    mask-image: url('/images/svg/bg-media.svg');
+    mask-size: auto 100%;
+    mask-repeat: no-repeat;
+    object-fit: cover;
+    mask-position: right;
+  }
+}
+
 body {
     margin: 0;
     font-family: "lufga" !important;
@@ -9,14 +25,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    background-color: #FFFAF3;
+    background-color: #fff;
   }
 
   
   
   ::selection {
     color: #fff;
-    background: #e11d48;
+    background: rgb(147 51 234);
   }
 
   ::-webkit-scrollbar {
@@ -24,5 +40,5 @@ body {
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: #2563eb;
+    background-color: rgb(147 51 234);
   }
