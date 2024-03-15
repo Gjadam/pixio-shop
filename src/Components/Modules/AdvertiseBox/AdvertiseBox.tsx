@@ -11,7 +11,7 @@ export default function AdvertiseBox({ text, image, isDiscount }: IAdvertiseBox)
         <div className=" relative w-72 ">
             <img src={image} alt="image" className='rounded-3xl' />
             <div className="absolute left-3 bottom-3">
-                <Button text={text} padding={' px-4 py-2'} />
+                <Button text={text} padding={' px-4 py-2'} bgColor={true} />
             </div>
             {
                 isDiscount &&
