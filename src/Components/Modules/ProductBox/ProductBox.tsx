@@ -8,7 +8,7 @@ interface IProductBox {
 
 export default function ProductBox({size}: IProductBox) {
     return (
-        <div className={` ${size === 'lg' ? 'w-80' : 'w-48'} flex justify-center items-center flex-col`}>
+        <div className={` ${size === 'lg' ? 'w-72' : 'w-48'} flex justify-center items-center flex-col`}>
             <div className={` group relative  w-full rounded-3xl overflow-hidden cursor-pointer`}>
                 <img src="/images/png/product1.png" alt="product" className=' rounded-3xl group-hover:-translate-y-6 transition-transform duration-1000 ease-in-out' />
                 <div className={`  px-6 py-3 text-center border-4 border-white bg-black hover:bg-purple-600 rounded-full overflow-hidden absolute ${size === 'lg' ? 'left-[5.5rem]' : 'left-[1.7rem]'}  -bottom-10 opacity-0 group-hover:opacity-100 group-hover:bottom-0 transition-all duration-500 ease-in-out  after:absolute after:left-0  after:bottom-0 after:bg-[rgba(255,255,255,0.1)] after:border-0  after:hover:border-r-1 after:border-white  z-0 after:-z-10 after:w-0 after:h-full after:hover:w-[101%]  after:transition-all after:ease-in-out after:duration-500 `}>
