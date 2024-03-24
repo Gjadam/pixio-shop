@@ -8,7 +8,7 @@ export default function FeaturedOfferBox() {
                 <span className=' bg-white py-1 px-4 uppercase'>50% off</span>
                 <span className=' text-3xl tracking-widest uppercase'>Summber</span>
                 <span className=' text-8xl  uppercase'>Sale</span>
-                <Button text='collect now' padding='px-3 py-2' />
+                <Button text='collect now' padding='px-5 py-3'  />
             </div>
         </div>
     )
