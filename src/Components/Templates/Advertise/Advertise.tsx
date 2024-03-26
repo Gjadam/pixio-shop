@@ -9,7 +9,7 @@ export default function Advertise() {
             <div className=" relative h-full">
                 <img src="/images/png/women.png" alt="media" className=' z-10 mask  h-full' />
                 <div className=" absolute left-16  bottom-10">
-                    <Button text={'Women collection'} padding='px-5 py-3' bgColor={true} />
+                    <Button text={'Women collection'} padding='px-5 py-3' bgColor={'white'} />
                 </div>
             </div>
             <div className=" flex justify-between items-start flex-col h-full">
