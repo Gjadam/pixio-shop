@@ -15,10 +15,10 @@ export default function ProductBox({size}: IProductBox) {
                     <span className=' text-sm text-white uppercase'>{size === 'lg' ? 'Quick View' : <FaEye className='text-xl' />}</span>
                 </div>
 
-                <div className=" absolute top-6 left-5">
-                    <span className=' px-3 py-1.5 uppercase bg-white text-black font-bold text-xs rounded-3xl'>get 20% Off</span>
+                <div className={` absolute ${size === 'lg' ? 'top-6 left-5' : ' top-3 left-3'}`}>
+                    <span className={` ${size === 'lg' ? 'px-3 py-1.5' : 'px-1 py-0.5'}  uppercase bg-white text-black font-bold text-xs rounded-3xl`}>get 20% Off</span>
                 </div>
-                <div className=" absolute right-4 top-4">
+                <div className={` absolute ${size === 'lg' ? 'top-4 right-4' : ' top-2 right-2'}`}>
                     <div className=" p-3 text-white bg-zinc-600 rounded-full relative overflow-hidden after:absolute after:left-0 after:bottom-0 after:bg-[rgba(255,255,255,0.1)] after:border-0  after:hover:border-r-1 after:border-white  z-0 after:-z-10 after:w-0 after:h-full after:hover:w-[105%]  after:transition-all after:ease-in-out after:duration-500">
                         <FaRegHeart className=' text-xl' />
                     </div>
