@@ -1,4 +1,3 @@
-import React from 'react'
 import NavBar from '../Components/Templates/NavBar/NavBar'
 import BreadCrumb from '../Components/Modules/BreadCrumb/BreadCrumb'
 import Button from '../Components/Modules/Button/Button';
@@ -126,7 +125,7 @@ export default function ProductDetail() {
                             <span className='  text-center text-lg  relative after:absolute after:w-full after:rounded-xl after:h-[2px] after:left-0 after:-bottom-[0.3rem] after:bg-black'>Reviews (12)</span>
                         </div>
                         <div className=" flex justify-start items-start flex-col gap-3 w-full mt-5">
-                            <span className=' text-start text-lg'>Comments</span>
+                            <span className=' font-bold text-start text-lg'>Comments</span>
                             <span className=' text-sm text-zinc-500'>There are many variations of passages of Lorem Ipsum available.</span>
                         </div>
                         <div className=" flex justify-center items-center gap-3 my-5 border-b-1 border-zinc-300 py-4">

@@ -1,4 +1,3 @@
-import React from 'react'
 import NavBar from '../Components/Templates/NavBar/NavBar';
 import CategoryHeader from '../Components/Modules/CategoryHeader/CategoryHeader';
 import { VscSettings } from "react-icons/vsc";
