@@ -10,31 +10,36 @@ import 'swiper/css/effect-creative';
 
 
 // import required modules
-import { Autoplay, EffectCoverflow, FreeMode, Pagination } from 'swiper/modules';
+import { Autoplay, FreeMode } from 'swiper/modules';
 import ProductBox from '../../Modules/ProductBox/ProductBox';
+import SectionHeader from '../../Modules/SectionHeader/SectionHeader';
 
 
 export default function UsersViewed() {
     return (
-        <div className=' container mx-auto flex justify-center items-start gap-8 my-28'>
+        <div className=' container mx-auto flex  justify-evenly items-center xl:items-start xl:flex-row flex-col gap-8 my-28'>
             <div className="">
                 <img src="/images/jpg/viewed.jpg" alt="viewed" className=' rounded-tr-full rounded-tl-full' />
             </div>
             <div className=" flex justify-center items-center flex-col p-5">
                 <div className=" flex justify-center items-center">
-                    <span className=' max-w-[33rem] text-4xl font-bold'>Users Who Viewed This Also Checked Out These Similar Profiles</span>
-                    <SpinnerIcon color=' text-black' />
+                    <div className=' max-w-[33rem] text-4xl font-bold px-10 md:text-start text-center'>
+                    <SectionHeader text='Users Who Viewed This Also Checked Out These Similar Profiles'/>
+                    </div>
+                    <div className="hidden md:block">
+                    <SpinnerIcon color=' text-purple-500' />
+                    </div>
                 </div>
                 <div className=" w-[40rem]  mt-8 ">
                     <Swiper
                         loop={true}
                         autoplay={true}
+                        freeMode={true}
+                        speed={1000}
                         slidesPerView={3}
                         spaceBetween={30}
                         centeredSlides={true}
-
-                        pagination={true}
-                        modules={[Autoplay, Pagination]}
+                        modules={[Autoplay]}
                         className="mySwiper"
                     >
                         <SwiperSlide>
