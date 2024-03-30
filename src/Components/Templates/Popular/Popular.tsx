@@ -5,8 +5,8 @@ import { FaRegHeart } from "react-icons/fa";
 import ProductBox from '../../Modules/ProductBox/ProductBox';
 export default function Popular() {
   return (
-    <div className='my-24 '>
-      <div className=" flex justify-around items-center">
+    <div className=' container mx-auto my-24 '>
+      <div className=" flex justify-between md:flex-row flex-col gap-3 items-center">
         <SectionHeader text='Most Popular Products' />
         <div className=" flex gap-4 p-1.5 border-1 border-black rounded-full">
           <PopularFilterItem isSelected={true} text='All' />
@@ -16,7 +16,7 @@ export default function Popular() {
           <PopularFilterItem text='Jacket' />
         </div>
       </div>
-      <div className=" flex justify-center items-center flex-wrap gap-8 p-12 mx-auto max-w-[92rem]  ">
+      <div className=" flex justify-center items-center flex-wrap gap-8 p-12 mx-auto   ">
         <ProductBox size='lg' />
         <ProductBox size='lg' />
         <ProductBox size='lg' />
