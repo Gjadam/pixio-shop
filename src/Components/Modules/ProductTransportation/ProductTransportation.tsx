@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 interface IProductTransportation {
     icon: ReactNode
     title: string

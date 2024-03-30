@@ -1,4 +1,3 @@
-import React from 'react'
 import SpinnerIcon from '../../Modules/SpinnerIcon/SpinnerIcon'
 
 // Import Swiper React components
@@ -10,7 +9,7 @@ import 'swiper/css/effect-creative';
 
 
 // import required modules
-import { Autoplay, FreeMode } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import ProductBox from '../../Modules/ProductBox/ProductBox';
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader';
 

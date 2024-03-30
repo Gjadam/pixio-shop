@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { PiBasket } from "react-icons/pi";
 import { FaEye } from "react-icons/fa";

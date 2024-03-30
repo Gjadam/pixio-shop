@@ -1,4 +1,3 @@
-import React from 'react'
 import { TbArrowUpRight } from "react-icons/tb";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";

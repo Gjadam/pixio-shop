@@ -1,4 +1,3 @@
-import React from 'react'
 import { TiArrowRight } from 'react-icons/ti'
 import { useSwiper } from 'swiper/react'
 

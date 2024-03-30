@@ -1,4 +1,3 @@
-import React from 'react'
 import { IoIosFlower } from 'react-icons/io'
 
 interface ISpinnerIcon {

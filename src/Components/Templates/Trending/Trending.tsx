@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader'
 import SpinnerIcon from '../../Modules/SpinnerIcon/SpinnerIcon'
 // Import Swiper React components

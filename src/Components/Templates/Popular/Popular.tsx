@@ -1,7 +1,5 @@
-import React from 'react'
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader'
 import PopularFilterItem from '../../Modules/PopularFilterItem/PopularFilterItem'
-import { FaRegHeart } from "react-icons/fa";
 import ProductBox from '../../Modules/ProductBox/ProductBox';
 export default function Popular() {
   return (

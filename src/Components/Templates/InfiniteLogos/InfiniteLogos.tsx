@@ -1,4 +1,3 @@
-import React from 'react'
 import Slider from 'react-infinite-logo-slider'
 
 export default function InfiniteLogos() {

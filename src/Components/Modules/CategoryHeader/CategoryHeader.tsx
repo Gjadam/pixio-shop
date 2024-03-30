@@ -1,4 +1,3 @@
-import React from 'react'
 import BreadCrumb from '../BreadCrumb/BreadCrumb'
 
 export default function CategoryHeader() {
