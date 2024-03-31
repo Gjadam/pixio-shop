@@ -3,18 +3,25 @@ import CategoryHeader from '../Components/Modules/CategoryHeader/CategoryHeader'
 import { VscSettings } from "react-icons/vsc";
 import { BiSort } from "react-icons/bi";
 import { IoIosSearch } from "react-icons/io";
+import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import ProductBox from '../Components/Modules/ProductBox/ProductBox';
 import Footer from '../Components/Templates/Footer/Footer';
+import FormInput from '../Components/Modules/FormInput/FormInput';
+import { useState } from 'react';
 export default function Shop() {
+
+    const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false)
+
     return (
         <>
             <NavBar />
             <CategoryHeader />
-            <div className=" flex justify-between items-start px-28 py-10">
-                <div className=" flex justify-center items-start flex-col gap-8 w-96 sticky top-24 ">
-                    <span className=' flex justify-center items-center gap-1 text-lg'><VscSettings />Filter</span>
+            <div className=" relative flex justify-between items-start px-28 py-10">
+                <div className={` lg:flex  gap-8 lg:w-96 fixed ${isOpenFilter ? '-bottom-[12.8rem]' : '-bottom-0'}  right-0 left-0 border-t-1 lg:border-0  border-black rounded-t-3xl p-5 lg:p-0 z-50 w-full lg:bg-primary bg-white lg:sticky lg:top-24 transition-all duration-500 `}>
+                <div className=" flex justify-center items-center lg:items-start flex-col w-full">
+                    <span className=' flex justify-center items-center gap-1 text-lg font-bold'><VscSettings />Filter</span>
                     <div className=" relative w-full">
-                        <input type="text" placeholder='Search Product' className=' w-full px-4 py-3 bg-primary rounded-xl placeholder:text-sm placeholder:text-black outline-none border-1 border-black ' />
+                        <FormInput type='search' placeholder='Search Product' />
                         <IoIosSearch className=' absolute right-3 bottom-4 text-xl cursor-pointer' />
                     </div>
                     <div className="rounded-xl px-4 py-3 w-full select-none">
@@ -46,14 +53,18 @@ export default function Shop() {
                             </div>
                         </div>
                     </div>
+                <div className={` lg:hidden absolute -top-10 ${isOpenFilter ? 'rotate-0 hover:-translate-y-2' : '-rotate-180 hover:translate-y-2'}  bg-white cursor-pointer rounded-full border-1 border-black transition-all duration-500 `} onClick={() => setIsOpenFilter(!isOpenFilter)}>
+                    <MdOutlineKeyboardArrowUp className=' text-5xl text-black'/>
                 </div>
-                <div className=" w-full mx-24">
-                    <div className=" flex justify-between items-center mb-5  px-5 rounded-xl">
+                </div>
+                </div>
+                <div className=" w-full lg:mx-24">
+                    <div className=" flex justify-center lg:justify-between items-center flex-wrap mb-5  px-5 font-bold rounded-xl">
                         <span className='flex justify-center items-center'><BiSort className='text-xl' />Ordered By :</span>
-                        <div className=" p-5">
+                        <div className=" m-5 text-center">
                             <span className='   p-5  cursor-pointer capitalize'>cheapest</span>
                             <span className=' p-5 cursor-pointer capitalize'>Expensive</span>
-                            <span className=' border-b-2 rounded-sm text-purple-600 border-purple-600 p-5 cursor-pointer capitalize'>All products</span>
+                            <span className='border-b-2 rounded-sm text-purple-600 border-purple-600 p-5 cursor-pointer capitalize'>All</span>
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-5 flex-wrap">
