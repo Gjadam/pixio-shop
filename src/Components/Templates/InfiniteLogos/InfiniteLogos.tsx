@@ -2,7 +2,7 @@ import Slider from 'react-infinite-logo-slider'
 
 export default function InfiniteLogos() {
     return (
-        <div className=" my-48 -rotate-2 border-t-2 border-b-2 border-black py-5 relative before:absolute before:w-10 before:h-full before:z-50 before:left-0 before:bg-infinite-logos-gradient-left before:-translate-y-5 after:absolute after:w-10 after:h-full after:z-50 after:right-0 after:bg-infinite-logos-gradient-right after:-translate-y-20  ">
+        <div className=" my-48  -rotate-2 border-t-2 border-b-2 border-black py-5 relative before:absolute before:w-10 before:h-full before:z-50 before:left-0 before:bg-infinite-logos-gradient-left before:-translate-y-5 after:absolute after:w-10 after:h-full after:z-50 after:right-0 after:bg-infinite-logos-gradient-right after:-translate-y-20  ">
             <Slider
                 width="400px"
                 duration={40}
