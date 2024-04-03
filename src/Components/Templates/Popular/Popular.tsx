@@ -6,7 +6,7 @@ export default function Popular() {
     <div className=' container mx-auto my-24 '>
       <div className=" flex justify-between md:flex-row flex-col gap-3 items-center">
         <SectionHeader text='Most Popular Products' />
-        <div className=" flex gap-4 p-1.5 border-1 border-black rounded-full">
+        <div className=" lg:w-96 w-80 mx-10 flex gap-4 p-1.5 border-1 border-black rounded-full">
           <PopularFilterItem isSelected={true} text='All' />
           <PopularFilterItem text='Dresses' />
           <PopularFilterItem text='Tops' />
