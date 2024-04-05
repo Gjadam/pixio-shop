@@ -1,4 +1,3 @@
-import NavBar from '../Components/Templates/NavBar/NavBar'
 import BreadCrumb from '../Components/Modules/BreadCrumb/BreadCrumb'
 import Button from '../Components/Modules/Button/Button';
 import ProductSocial from '../Components/Modules/ProductSocial/ProductSocial';
@@ -22,13 +21,11 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
-import Footer from '../Components/Templates/Footer/Footer';
 
 
 export default function ProductDetail() {
     return (
         <>
-            <NavBar />
             <div className=" px-20">
                 <div className="flex justify-start items-start mt-5">
                     <BreadCrumb />
@@ -171,7 +168,6 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     )
 }
