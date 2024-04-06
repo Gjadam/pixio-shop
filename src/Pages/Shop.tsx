@@ -1,4 +1,3 @@
-import NavBar from '../Components/Templates/NavBar/NavBar';
 import CategoryHeader from '../Components/Modules/CategoryHeader/CategoryHeader';
 import { VscSettings } from "react-icons/vsc";
 import { BiSort } from "react-icons/bi";
@@ -14,7 +13,6 @@ export default function Shop() {
 
     return (
         <>
-            <NavBar />
             <CategoryHeader />
             <div className=" relative flex justify-between items-start px-28 py-10">
                 <div className={` lg:flex  gap-8 lg:w-96 fixed ${isOpenFilter ? '-bottom-[12.8rem]' : '-bottom-0'}  right-0 left-0 border-t-1 lg:border-0  border-black rounded-t-3xl p-5 lg:p-0 z-50 w-full lg:bg-primary bg-white lg:sticky lg:top-24 transition-all duration-500 `}>
@@ -53,8 +51,8 @@ export default function Shop() {
                             </div>
                         </div>
                     </div>
-                <div className={` lg:hidden absolute -top-10 ${isOpenFilter ? 'rotate-0 hover:-translate-y-2' : '-rotate-180 hover:translate-y-2'}  bg-white cursor-pointer rounded-full border-1 border-black transition-all duration-500 `} onClick={() => setIsOpenFilter(!isOpenFilter)}>
-                    <MdOutlineKeyboardArrowUp className=' text-5xl text-black'/>
+                <div className={` lg:hidden absolute -top-7 ${isOpenFilter ? 'rotate-0 hover:-translate-y-3' : '-rotate-180 hover:translate-y-2'}  bg-black  cursor-pointer rounded-full border-1 border-black transition-all duration-500 `} onClick={() => setIsOpenFilter(!isOpenFilter)}>
+                    <MdOutlineKeyboardArrowUp className=' text-4xl  text-white'/>
                 </div>
                 </div>
                 </div>
@@ -77,18 +75,17 @@ export default function Shop() {
                         <ProductBox size='lg' />
                         <ProductBox size='lg' />
                     </div>
-                    <div className=" flex justify-between items-center w-full mt-10">
-                        <span className='texsm'>Showing 1–5 Of 50 Results</span>
+                    <div className=" flex justify-center  items-center flex-wrap gap-10 w-full mt-10">
+                        <span className=' text-sm text-center'>Showing 1–5 Of 50 Results</span>
                         <div className="">
-                            <span className=' mx-1 border-1 border-black rounded-full px-6 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300 py-2'>1</span>
-                            <span className=' mx-1 border-1 border-black rounded-full px-6 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300 py-2'>2</span>
-                            <span className=' mx-1 border-1 border-black rounded-full px-6 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300 py-2'>3</span>
-                            <span className=' mx-1 border-1 border-black rounded-full px-6 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300 py-2'>NEXT</span>
+                            <span className=' mx-1 border-1 border-black rounded-full px-3 py-1 lg:px-6 lg:py-2 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300'>1</span>
+                            <span className=' mx-1 border-1 border-black rounded-full px-3 py-1 lg:px-6 lg:py-2 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300'>2</span>
+                            <span className=' mx-1 border-1 border-black rounded-full px-3 py-1 lg:px-6 lg:py-2 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300'>3</span>
+                            <span className=' mx-1 border-1 border-black rounded-full px-3 py-1 lg:px-6 lg:py-2 hover:bg-black hover:text-white cursor-pointer transition-colors duration-300'>NEXT</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer/>
         </>
     )
 }
