@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
+import { IoIosCloudUpload } from "react-icons/io";
 interface IFormInput {
     label?: string
     type: string
@@ -13,7 +14,7 @@ export default function FormInput({ label, type, placeholder }: IFormInput) {
         type === 'password' ? (
             <label htmlFor="password" className='relative flex justify-center items-start flex-col gap-1 w-full'>
                 <span>{label}</span>
-                <input type={isShowPassword ? 'text' : 'password'} id='password' placeholder={placeholder} className=' w-full p-3 rounded-xl border-1 border-black outline-none  placeholder:text-zinc-600 focus:bg-primary transition-colors duration-500 ' />
+                <input type={isShowPassword ? 'text' : 'password'} id='password' placeholder={placeholder} className=' w-full p-3 rounded-xl placeholder:text-sm  border-1 border-black text-black outline-none  placeholder:text-zinc-600 focus:bg-primary transition-colors duration-500 ' />
                 <div className=" absolute right-3 bottom-[0.8rem]">
                     {
                         isShowPassword ? (
@@ -30,12 +31,18 @@ export default function FormInput({ label, type, placeholder }: IFormInput) {
             </label>
         ) : type === 'textarea' ? (
             <label>
-                <textarea className='w-full h-48 outline-none p-3 border-1 border-black placeholder:text-zinc-600 rounded-xl focus:bg-primary transition-colors duration-500' placeholder={placeholder} ></textarea>
+                <textarea className='w-full h-48 outline-none p-3 border-1 border-black placeholder:text-zinc-600 rounded-xl placeholder:text-sm  text-black focus:bg-primary transition-colors duration-500' placeholder={placeholder} ></textarea>
             </label>
+        ) : type === 'file' ? (            
+            <label htmlFor="file" className='flex justify-center items-start flex-col gap-1 w-full'>
+                <span>{label}</span>
+                <span className='flex justify-center items-center gap-3 w-full p-3 bg-white hover:bg-primary transition-colors duration-500 rounded-xl font-bold text-zinc-600 hover:text-black text-center cursor-pointer'><IoIosCloudUpload className=' text-xl'/>Upload image</span>
+                <input type={type} id='file' min={0} placeholder={placeholder} className=' hidden' />
+            </label>         
         ) : (
             <label htmlFor="email" className='flex justify-center items-start flex-col gap-1 w-full'>
                 <span>{label}</span>
-                <input type={type} id='email' placeholder={placeholder} className=' w-full p-3 rounded-xl border-1 border-black outline-none  placeholder:text-zinc-600 focus:bg-primary transition-colors duration-500 ' />
+                <input type={type} id='email' min={0} placeholder={placeholder} className=' w-full p-3 rounded-xl border-1 border-black text-black outline-none placeholder:text-sm  placeholder:text-zinc-600 focus:bg-primary transition-colors duration-500 ' />
             </label>
         )
     )
