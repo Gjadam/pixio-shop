@@ -28,9 +28,9 @@ export default function TopUp() {
         <div className='flex justify-center items-center fixed -right-16 md:-right-5 bottom-1/2 z-50 rotate-90 group cursor-pointer' onClick={scrollToUpHandler}>
             {
                 scrollWidth === 0 ? (
-                    <MdBlock className="   -rotate-90 mt-0.5 translate-x-5 group-hover:-translate-x-1 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <MdBlock className="-rotate-90 mt-0.5 translate-x-5 group-hover:-translate-x-1 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 ) : (
-                    <IoIosArrowUp className="  -rotate-90 mt-0.5 translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <IoIosArrowUp className="-rotate-90 mt-0.5 translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 )
             }
             <span className=" font-bold text-xs mr-4 transition-all duration-300">Scroll to up</span>
