@@ -3,7 +3,7 @@ import FooterLinks from '../../Modules/FooterLinks/FooterLinks'
 import { IoIosArrowRoundForward } from "react-icons/io";
 export default function Footer() {
   return (
-    <div className=' border-t-1 border-black w-full mt-28 pt-20 px-20'>
+    <div className=' border-t-1 border-black w-full  pt-20 px-8'>
       <div className="container mx-auto flex md:justify-around justify-start items-start gap-14 flex-wrap">
         <div className=" flex justify-center items-start flex-col gap-5">
           <img src="/images/svg/logo.svg" alt="logo" />
