@@ -9,11 +9,35 @@ import { BiSolidUserCircle } from "react-icons/bi";
 import { PiUserCircleThin } from "react-icons/pi";
 import { IoIosSettings } from "react-icons/io";
 import NavBarLinkMobile from '../../Modules/NavBarLinkMobile/NavBarLinkMobile';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfosFromServer } from '../../../Redux/store/auth';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { logout } from '../../../Redux/store/auth';
+import { Link } from 'react-router-dom';
+import type { RootState } from '@reduxjs/toolkit/query';
 export default function NavBar() {
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+  const userInfos = useSelector((state: RootState) => state.auth[0])
+
+
 
   const [openStickyNavbar, setOpenStickyNavbar] = useState<boolean>(false)
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false)
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
+  useEffect(() => {
+    dispatch(getUserInfosFromServer())
+
+    if (userInfos?.id) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
+    }
+  }, [userInfos])
+
+  
   useEffect(() => {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 250) {
@@ -22,7 +46,13 @@ export default function NavBar() {
         setOpenStickyNavbar(false)
       }
     })
+
   }, [])
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    setIsLoggedIn(false)
+  }
 
 
   return (
@@ -31,24 +61,18 @@ export default function NavBar() {
         <div className=" px-5 flex justify-between items-center">
           <div className=" flex justify-center items-center gap-28">
             <div className="">
-              <a href="">
+              <Link to="/">
                 <img src="/images/svg/logo.svg" className=' lg:w-36 w-24 ' alt="logo" />
-              </a>
+              </Link>
             </div>
             <div className=" hidden lg:flex gap-14">
-              <NavBarLink text={'Home'} />
-              <NavBarLink text={'Shop'} />
-              <NavBarLink text={'Blog'} />
-              <NavBarLink text={'Portfolio'} />
-              <NavBarLink text={'Pages'} />
+              <NavBarLink text={'Shop'} path='/shop' />
+              <NavBarLink text={'Blog'} path='' />
+              <NavBarLink text={'Portfolio'} path='' />
+              <NavBarLink text={'Contact Us'} path='/contact-us' />
             </div>
           </div>
           <div className=" flex justify-center items-center gap-12">
-            {/* <div className=" ">
-            <a href="" className=''>
-            <span>Login/Register</span>
-            </a>
-          </div> */}
             <div className=" hidden lg:flex justify-center items-center gap-5 text-xl">
               <FiSearch className=' cursor-pointer' />
               <RiHeart2Line className=' cursor-pointer' />
@@ -58,24 +82,44 @@ export default function NavBar() {
               </div>
             </div>
             <div className=" flex justify-center items-center gap-5 ">
-              <div className="relative group/dropdown">
-                <PiUserCircleThin className=' text-4xl cursor-pointer' />
-                <div className={`  absolute right-0 top-16 opacity-0 group-hover/dropdown:top-9 group-hover/dropdown:opacity-100 transition-all duration-500 z-50 overflow-hidden text-zinc-800 ${openStickyNavbar && 'bg-white'} bg-primary border-1 rounded-xl shadow-lg`}>
-                  <div className="flex justify-start items-center gap-2 border-b-1 px-5 py-3 hover:bg-zinc-200 transition-colors duration-300 ">
-                    <BiSolidUserCircle className=' text-3xl ' />
-                    <div className="flex justify-center items-start flex-col">
-                      <span className='text-sm font-bold'>username</span>
-                      <span className='text-xs'>example@gmail.com</span>
+              {
+                isLoggedIn ? (
+                  <div className="relative">
+                    <PiUserCircleThin className=' text-4xl cursor-pointer' onClick={() => setIsOpenDropDown(!isOpenDropDown)} />
+                    <div className={` z-10  absolute right-0 ${isOpenDropDown ? 'top-9 opacity-100 visible' : 'top-16 opacity-0 invisible'} transition-all duration-500 z-50 overflow-hidden text-zinc-800 ${openStickyNavbar && 'bg-white'}  bg-primary border-1 rounded-xl shadow-lg`}>
+                      <div className="flex justify-start items-center gap-2 border-b-1 px-5 py-3 hover:bg-zinc-200 transition-colors duration-300 ">
+                        <BiSolidUserCircle className=' text-3xl ' />
+                        <div className="flex justify-center items-start flex-col">
+                          <span className='text-sm font-bold'>{userInfos?.username}</span>
+                          <span className='text-xs'>{userInfos?.email}</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-start items-center gap-2 border-b-1 px-6 py-2  hover:bg-zinc-200  transition-colors duration-300 cursor-pointer group/setting">
+                        <IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />
+                        <div className="flex justify-center items-start flex-col">
+                          <span className=' text-sm font-bold'>User Panel</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-start items-center gap-2 border-b-1 px-6 py-2  hover:bg-zinc-200  transition-colors duration-300 cursor-pointer group/setting" onClick={logoutHandler}>
+                        <IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />
+                        <div className="flex justify-center items-start flex-col">
+                          <span className=' text-sm font-bold'>Logout</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-start items-center gap-2 border-b-1 px-6 py-2  hover:bg-zinc-200  transition-colors duration-300 cursor-pointer group/setting">
-                    <IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />
-                    <div className="flex justify-center items-start flex-col">
-                      <span className=' text-sm font-bold'>User Panel</span>
-                    </div>
+                ) : (
+                  <div className=" ">
+                    <Link to="/login" className=' hover:text-purple-600 transition-colors hover:font-bold'>
+                      <span>Login</span>
+                    </Link>
+                    <span>/</span>
+                    <Link to="/sign-up" className=' hover:text-purple-600 transition-colors hover:font-bold'>
+                      <span>Register</span>
+                    </Link>
                   </div>
-                </div>
-              </div>
+                )
+              }
               <div className=" lg:hidden">
                 <HiBars3BottomRight className=' text-3xl cursor-pointer' onClick={() => setIsOpenSideBar(!isOpenSideBar)} />
               </div>
