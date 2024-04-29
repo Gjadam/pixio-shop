@@ -15,13 +15,13 @@ interface IRegistration {
 export default function Registration({ type }: IRegistration) {
 
     const navigate = useNavigate()
-    const [openToastAlert, setOpenToastAlert] = useState<boolean>(false)
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [toastAlertText, setToastAlertText] = useState<string>('')
+    const [openToastAlert, setOpenToastAlert] = useState<boolean>(false)
     const [isToastAlertOK, setIsToastAlertOK] = useState<boolean>(false)
 
     const firstNameOnChange = (e) => {
@@ -170,11 +170,11 @@ export default function Registration({ type }: IRegistration) {
                     <BreadCrumb path={type} />
                     <div className=" w-full relative after:absolute after:-z-10 after:w-96 after:h-[35rem] after:rounded-t-full  after:bg-white after:left-0 after:bottom-0 z-0">
                         <div className=" flex justify-center items-center w-full z-10">
-                            <img src="/images/png/login.png" alt="login" className=' z-20 ' />
+                            <img src={`/images/png/${type === 'login' ? 'login' : 'signup'}.png`} alt="login" className=' z-20 ' />
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center px-5 lg:w-1/2 w-full ">
+                <div className="flex justify-center items-center px-5 py-24 lg:w-1/2 w-full ">
                     <div className="flex justify-center items-center flex-col gap-8 border-1 border-black py-10 lg:px-24 px-10 text-center rounded-3xl w-[34rem] ">
                         <div className=" flex justify-center items-center flex-col  gap-3">
                             <span className=' font-bold text-3xl'>{type === 'login' ? 'Welcome Back' : 'Registration Now'}</span>
