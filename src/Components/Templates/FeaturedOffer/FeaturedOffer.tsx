@@ -37,21 +37,18 @@ export default function FeaturedOffer() {
                     autoplay={true}
                     speed={1000}
                     spaceBetween={30}
-                    slidesPerView={3}
                     modules={[Autoplay]}
                     className="mySwiper"
                 >
+
                     <SwiperSlide>
-                        <FeaturedOfferBox />
+                        <FeaturedOfferBox imgUrl='/images/png/Offer1.png' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeaturedOfferBox />
+                        <FeaturedOfferBox imgUrl='/images/png/Offer2.png' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeaturedOfferBox />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <FeaturedOfferBox />
+                        <FeaturedOfferBox imgUrl='/images/png/Offer3.png' />
                     </SwiperSlide>
                 </Swiper>
             </div>
