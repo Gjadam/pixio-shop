@@ -70,22 +70,22 @@ export default function () {
                         </div>
                     </div>
                     <div className="flex flex-col gap-5 bg-zinc-900 text-white p-12 w-[30rem] rounded-3xl">
-                        <FormInput placeholder='' type='text' label='Your Name' />
-                        <FormInput placeholder='' type='email' label='Email Address' />
-                        <FormInput placeholder='' type='number' label='Phone Number' />
-                        <FormInput placeholder='' type='textarea' label='Message' />
+                        <FormInput placeholder='your name' type='text' label='Your Name' />
+                        <FormInput placeholder='email address' type='email' label='Email Address' />
+                        <FormInput placeholder='phone number' type='number' label='Phone Number' />
+                        <FormInput placeholder='message...' type='textarea' label='Message' />
                         <Button padding=' p-3 w-full text-center' text='Submit' bgColor='white' />
                     </div>
                 </div>
                 <div className=" relative w-full">
                     <img src="/images/png/map.png" alt="map" className=' xl:scale-150 xl:translate-x-36  xl:mt-16 select-none z-50' />
-                    <label htmlFor="usa" className={`p-1 rounded-full ${selectCountry === 'usa' && 'animate-ping bg-red-600 p-1.5'} bg-black  absolute left-14 top-14 md:left-20 md:top-24 lg:left-20 lg:top-24 cursor-pointer`}>
+                    <label htmlFor="usa" className={`p-1 rounded-full ${selectCountry === 'usa' && 'animate-ping bg-rose-600 p-1.5'} bg-black  absolute left-14 top-14 md:left-20 md:top-24 lg:left-20 lg:top-24 cursor-pointer`}>
                         <input type="radio" value='usa' id='usa' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
                     </label>
-                    <label htmlFor="rus" className={`p-1 rounded-full ${selectCountry === 'rus' && 'animate-ping bg-red-600 p-1.5'}  bg-black absolute right-44 top-10 xl:right-0 cursor-pointer`}>
+                    <label htmlFor="rus" className={`p-1 rounded-full ${selectCountry === 'rus' && 'animate-ping bg-rose-600 p-1.5'}  bg-black absolute right-44 top-10 xl:right-0 cursor-pointer`}>
                         <input type="radio" value='rus' id='rus' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
                     </label>
-                    <label htmlFor="africa" className={`p-1 rounded-full ${selectCountry === 'afr' && 'animate-ping bg-red-600 p-1.5'}  bg-black absolute right-72 bottom-32 md:right-96 md:bottom-48 lg:right-[35rem] lg:bottom-64 xl:right-36 xl:bottom-32 cursor-pointer`}>
+                    <label htmlFor="africa" className={`p-1 rounded-full ${selectCountry === 'afr' && 'animate-ping bg-rose-600 p-1.5'}  bg-black absolute right-72 bottom-32 md:right-96 md:bottom-48 lg:right-[35rem] lg:bottom-64 xl:right-36 xl:bottom-32 cursor-pointer`}>
                         <input type="radio" value='afr' id='africa' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
                     </label>
                 </div>
