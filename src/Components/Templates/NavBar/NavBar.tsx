@@ -8,36 +8,51 @@ import { LiaTimesCircle } from "react-icons/lia";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { PiUserCircleThin } from "react-icons/pi";
 import { IoIosSettings } from "react-icons/io";
+import { FaInstagram } from "react-icons/fa";
+import { FaTelegram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { LuLayoutPanelLeft } from "react-icons/lu";
 import NavBarLinkMobile from '../../Modules/NavBarLinkMobile/NavBarLinkMobile';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfosFromServer } from '../../../Redux/store/auth';
+import { getUserInfosFromServer, localStorageData, logOutUserAction } from '../../../Redux/store/auth';
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { logout } from '../../../Redux/store/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { RootState } from '@reduxjs/toolkit/query';
+import NavBarOption from '../../Modules/NavBarOption/NavBarOption';
+import { CgLogOff } from 'react-icons/cg';
+import Modal from '../../Modules/Modal/Modal';
+import ToastAlert from '../../Modules/ToastAlert/ToastAlert';
 export default function NavBar() {
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
-  const userInfos = useSelector((state: RootState) => state.auth[0])
-
-
-
+  const userDatas = useSelector((state: RootState) => state.auth)
+  const navigate = useNavigate()
+  const [collections, setCollections] = useState<[]>([])
   const [openStickyNavbar, setOpenStickyNavbar] = useState<boolean>(false)
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false)
   const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false)
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [toastAlertText, setToastAlertText] = useState<string>('')
+  const [openToastAlert, setOpenToastAlert] = useState<boolean>(false)
+
+
 
   useEffect(() => {
-    dispatch(getUserInfosFromServer())
-
-    if (userInfos?.id) {
-      setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false)
+    const userLocalStorageData = localStorage.getItem("user")
+    if (userLocalStorageData) {
+      dispatch(getUserInfosFromServer())
     }
-  }, [userInfos])
+  }, [])
 
-  
+  useEffect(() => {
+    fetch(`https://webstorepr.pythonanywhere.com/store/collections/`) // Get all collections
+      .then(res => res.json())
+      .then(allCollections => {
+        setCollections(allCollections)
+      })
+  }, [])
+
   useEffect(() => {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 250) {
@@ -46,13 +61,27 @@ export default function NavBar() {
         setOpenStickyNavbar(false)
       }
     })
-
   }, [])
 
-  const logoutHandler = () => {
-    dispatch(logout())
-    setIsLoggedIn(false)
+  const openLogOutModal = () => {
+    setIsOpenModal(true)
   }
+
+  const closeModal = () => {
+    setIsOpenModal(false);
+  }
+
+  const confirmModal = () => {
+    dispatch(logOutUserAction())
+    setIsOpenModal(false);
+    setToastAlertText('Logout successfully')
+    setOpenToastAlert(!openToastAlert)
+    setTimeout(() => {
+      setOpenToastAlert(false)
+    }, 3000);
+    navigate('/', { replace: true })
+  }
+
 
 
   return (
@@ -66,46 +95,46 @@ export default function NavBar() {
               </Link>
             </div>
             <div className=" hidden lg:flex gap-14">
-              <NavBarLink text={'Shop'} path='/shop' />
-              <NavBarLink text={'Blog'} path='' />
-              <NavBarLink text={'Portfolio'} path='' />
-              <NavBarLink text={'Contact Us'} path='/contact-us' />
+              <NavBarLink text={'Shop'} path='/shop' isOpenStickyNavbar={openStickyNavbar} />
+              <NavBarLink text={'Contact Us'} path='/contact-us' isOpenStickyNavbar={openStickyNavbar} />
+              <NavBarLink text={'Collections'} path='' isOpenStickyNavbar={openStickyNavbar} dropDownDatas={collections} />
             </div>
           </div>
           <div className=" flex justify-center items-center gap-12">
             <div className=" hidden lg:flex justify-center items-center gap-5 text-xl">
               <FiSearch className=' cursor-pointer' />
               <RiHeart2Line className=' cursor-pointer' />
-              <div className=" relative cursor-pointer">
-                <MdOutlineShoppingCart className=' ' />
-                <span className=' absolute -right-4 bottom-3 text-white bg-purple-600 rounded-full px-1.5 py-0.5 text-xs'>5</span>
-              </div>
+              <Link to='/cart'>
+                <div className=" relative cursor-pointer">
+                  <MdOutlineShoppingCart className=' ' />
+                  <span className=' absolute -right-4 bottom-3 text-white bg-purple-600 rounded-full px-1.5 py-0.5 text-xs'>5</span>
+                </div>
+              </Link>
             </div>
             <div className=" flex justify-center items-center gap-5 ">
               {
-                isLoggedIn ? (
+                userDatas.userInfos ? (
                   <div className="relative">
                     <PiUserCircleThin className=' text-4xl cursor-pointer' onClick={() => setIsOpenDropDown(!isOpenDropDown)} />
-                    <div className={` z-10  absolute right-0 ${isOpenDropDown ? 'top-9 opacity-100 visible' : 'top-16 opacity-0 invisible'} transition-all duration-500 z-50 overflow-hidden text-zinc-800 ${openStickyNavbar && 'bg-white'}  bg-primary border-1 rounded-xl shadow-lg`}>
-                      <div className="flex justify-start items-center gap-2 border-b-1 px-5 py-3 hover:bg-zinc-200 transition-colors duration-300 ">
+                    <div className={` z-10  absolute right-0 ${openStickyNavbar && 'bg-white'} ${isOpenDropDown ? 'top-14 opacity-100 visible' : 'top-20 opacity-0 invisible'} transition-all duration-500 z-50 overflow-hidden text-zinc-800 ${openStickyNavbar && 'bg-white'}  bg-primary border-b border-b-purple-600 rounded-b-lg shadow-lg`}>
+                      <div className="flex justify-start items-center gap-2 border-b-1 px-5 py-3">
                         <BiSolidUserCircle className=' text-3xl ' />
                         <div className="flex justify-center items-start flex-col">
-                          <span className='text-sm font-bold'>{userInfos?.username}</span>
-                          <span className='text-xs'>{userInfos?.email}</span>
+                          <span className='text-sm font-bold'>{userDatas.userInfos?.username}</span>
+                          <span className='text-xs'>{userDatas.userInfos?.email}</span>
                         </div>
                       </div>
-                      <div className="flex justify-start items-center gap-2 border-b-1 px-6 py-2  hover:bg-zinc-200  transition-colors duration-300 cursor-pointer group/setting">
-                        <IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />
-                        <div className="flex justify-center items-start flex-col">
-                          <span className=' text-sm font-bold'>User Panel</span>
-                        </div>
-                      </div>
-                      <div className="flex justify-start items-center gap-2 border-b-1 px-6 py-2  hover:bg-zinc-200  transition-colors duration-300 cursor-pointer group/setting" onClick={logoutHandler}>
-                        <IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />
-                        <div className="flex justify-center items-start flex-col">
-                          <span className=' text-sm font-bold'>Logout</span>
-                        </div>
-                      </div>
+                      {
+                        userDatas.userInfos?.username === 'admin' ? (
+                          <Link to='/p-admin'>
+                            <NavBarOption title='Admin panel' icon={<LuLayoutPanelLeft className='text-2xl' />} />
+                          </Link>
+                        ) : (
+                          <NavBarOption title='User panel' icon={<LuLayoutPanelLeft className='text-2x' />} />
+                        )
+                      }
+                      <NavBarOption title='Setting' icon={<IoIosSettings className=' text-2xl group-hover/setting:animate-spin' />} />
+                      <NavBarOption title='Logout' icon={<CgLogOff className='text-2xl' />} onClickHandler={openLogOutModal} />
                     </div>
                   </div>
                 ) : (
@@ -136,14 +165,19 @@ export default function NavBar() {
             <LiaTimesCircle className=' hover:text-red-600 transition-colors duration-200 text-4xl cursor-pointer' onClick={() => setIsOpenSideBar(!isOpenSideBar)} />
           </div>
           <div className="">
-            <NavBarLinkMobile text='Test' />
-            <NavBarLinkMobile text='Test' />
-            <NavBarLinkMobile text='Test' />
-            <NavBarLinkMobile text='Test' />
-            <NavBarLinkMobile text='Test' />
+            <NavBarLinkMobile text='Shop' path='/shop' />
+            <NavBarLinkMobile text='Contact Us' path='/contact-us' />
+            <NavBarLinkMobile text='Collections' path='' />
+            <div className=" flex justify-start items-start gap-3 py-5 pl-3 text-2xl">
+              <FaInstagram className=' cursor-pointer hover:text-pink-700 transition-colors duration-200' />
+              <FaXTwitter className=' cursor-pointer hover:text-zinc-700 transition-colors duration-200' />
+              <FaTelegram className=' cursor-pointer hover:text-blue-700 transition-colors duration-200' />
+            </div>
           </div>
         </div>
       </div>
+      <Modal isOpen={isOpenModal} confirmModal={confirmModal} closeModal={closeModal} text='Are you sure you want to log out?' />
+      <ToastAlert text={toastAlertText} isOk={true} isOpen={openToastAlert} />
     </>
   )
 }
