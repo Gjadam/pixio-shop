@@ -14,7 +14,7 @@ export default function AdvertiseBox({ text, image, isDiscount }: IAdvertiseBox)
             </div>
             {
                 isDiscount &&
-                <div className="absolute -right-10 -top-10">
+                <div className=" hidden sm:block absolute -right-10 -top-10">
                     <div className=" relative">
                         <img src="/images/png/star.png" alt="star" className=' -z-10 animate-spin-slow' />
                         <span className=' absolute left-10 top-7 z-10 max-w-1 capitalize font-bold'>50% sale</span>
