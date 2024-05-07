@@ -13,7 +13,7 @@ export default function Modal({ isOpen, closeModal, text, confirmModal }: IModal
 
 
     return (
-        <div className={`${isOpen ? 'visible opacity-100' : 'invisible opacity-0'} flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-zinc-950 bg-opacity-75 z-50 transition-all duration-300`}>
+        <div className={`${isOpen ? 'visible opacity-100' : 'invisible opacity-0'} flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-zinc-950 bg-opacity-80 z-[999] transition-all duration-300`} onClick={closeModal}>
             <div className=" relative overflow-hidden flex justify-evenly items-center flex-col gap-5 bg-white w-[30rem] min-h-56 p-10 rounded-xl text-center shadow-2xl shadow-black">
                 <h1 className=' text-2xl font-bold capitalize'>{text}</h1>
                 <div className=" flex justify-center items-center flex-wrap gap-5 w-full">
