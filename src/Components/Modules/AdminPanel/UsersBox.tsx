@@ -4,10 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { IoBan } from "react-icons/io5";
 import SpinnerIcon from '../SpinnerIcon/SpinnerIcon';
 import { IAdminUsers } from "../../Templates/AdminPanel/AdminUsers";
-import Modal from "../Modal/Modal";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch } from "@reduxjs/toolkit";
+
 
 export default function UsersBox({ id, username, email }: IAdminUsers) {
 
