@@ -1,4 +1,3 @@
-import NavBar from '../Components/Templates/NavBar/NavBar'
 import Header from '../Components/Templates/Header/Header'
 import Categories from '../Components/Templates/Categories/Categories'
 import Advertise from '../Components/Templates/Advertise/Advertise'
@@ -10,12 +9,15 @@ import FeaturedOffer from '../Components/Templates/FeaturedOffer/FeaturedOffer'
 import Sponsored from '../Components/Templates/Sponsored/Sponsored'
 import Trending from '../Components/Templates/Trending/Trending'
 import SecondAdvertise from '../Components/Templates/SecondAdvertise/SecondAdvertise'
+import NavBar from '../Components/Templates/NavBar/NavBar'
+import TopUp from '../Components/Modules/TopUp/TopUp'
 import Footer from '../Components/Templates/Footer/Footer'
 
 export default function Index(){
   return (
     <>
-    <NavBar />
+    <NavBar/>
+    <TopUp/>
     <Header />
     <Categories />
     <Advertise />
