@@ -7,14 +7,15 @@ import Footer from '../Footer/Footer'
 import NavBar from '../NavBar/NavBar'
 import { useEffect, useState } from 'react'
 import ToastAlert from '../../Modules/ToastAlert/ToastAlert'
+import { useDispatch } from 'react-redux'
+import { ThunkDispatch } from '@reduxjs/toolkit'
+import { loginUserAction, registerUserAction } from '../../../Redux/store/auth'
 
 interface IRegistration {
     type: string
 }
 
 export default function Registration({ type }: IRegistration) {
-
-    const navigate = useNavigate()
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [username, setUsername] = useState<string>('')
@@ -23,6 +24,9 @@ export default function Registration({ type }: IRegistration) {
     const [toastAlertText, setToastAlertText] = useState<string>('')
     const [openToastAlert, setOpenToastAlert] = useState<boolean>(false)
     const [isToastAlertOK, setIsToastAlertOK] = useState<boolean>(false)
+
+    const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+    const navigate = useNavigate()
 
     const firstNameOnChange = (e) => {
         setFirstName(e.target.value)
@@ -48,23 +52,18 @@ export default function Registration({ type }: IRegistration) {
                 password,
             }
 
-            fetch(`https://webstorepr.pythonanywhere.com/auth/jwt/create/`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUserInfoForGetToken),
-            })
+            dispatch(loginUserAction(newUserInfoForGetToken))
                 .then(res => {
-                    if (res.ok) {
+                    if (res.payload.username) {
+                        setUsername('')
+                        setPassword('')
                         setToastAlertText(`You have signed in successfully`)
                         setIsToastAlertOK(true)
                         setOpenToastAlert(!openToastAlert)
                         setTimeout(() => {
                             navigate('/')
-                        }, 1500);
-                        return res.json()
-                    } else if (res.status === 401) {
+                        }, 1000);
+                    } else {
                         setToastAlertText('Invalid username or password !')
                         setIsToastAlertOK(false)
                         setOpenToastAlert(!openToastAlert)
@@ -72,9 +71,6 @@ export default function Registration({ type }: IRegistration) {
                             setOpenToastAlert(false)
                         }, 3000);
                     }
-                })
-                .then(data => {
-                    localStorage.setItem('user', JSON.stringify(data.access))
                 })
         } else {
             setToastAlertText('Please fill up all fields !')
@@ -98,55 +94,27 @@ export default function Registration({ type }: IRegistration) {
                 last_name: lastName,
             }
 
-            fetch(`https://webstorepr.pythonanywhere.com/auth/users/`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUserInfo),
-
-            })
+            dispatch(registerUserAction(newUserInfo))
                 .then(res => {
-                    if (res.ok) {
-                        fetch(`https://webstorepr.pythonanywhere.com/auth/jwt/create/`, {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                username,
-                                password
-                            }),
-                        })
-                            .then(res => {
-                                if (res.ok) {
-                                    setToastAlertText(`You have signed in successfully`)
-                                    setIsToastAlertOK(true)
-                                    setOpenToastAlert(!openToastAlert)
-                                    setTimeout(() => {
-                                        navigate('/')
-                                    }, 1500);
-                                    return res.json()
-                                } else if (res.status === 401) {
-                                    setToastAlertText('Invalid username or password !')
-                                    setIsToastAlertOK(false)
-                                    setOpenToastAlert(!openToastAlert)
-                                    setTimeout(() => {
-                                        setOpenToastAlert(false)
-                                    }, 3000);
-                                }
-                            })
-                            .then(data => {
-                                localStorage.setItem('user', JSON.stringify(data.access))
-                            })
+                    if (res.payload.username) {
+                        setFirstName('')
+                        setLastName('')
+                        setEmail('')
+                        setUsername('')
+                        setPassword('')
+                        setToastAlertText(`You have signed up successfully`)
+                        setIsToastAlertOK(true)
+                        setOpenToastAlert(!openToastAlert)
+                        setTimeout(() => {
+                            navigate('/')
+                        }, 1000);
                     } else {
-                        setToastAlertText('This username has already been registered.')
+                        setToastAlertText('Invalid username or password !')
                         setIsToastAlertOK(false)
                         setOpenToastAlert(!openToastAlert)
                         setTimeout(() => {
                             setOpenToastAlert(false)
                         }, 3000);
-
                     }
                 })
         } else {
@@ -174,7 +142,7 @@ export default function Registration({ type }: IRegistration) {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center px-5 py-24 lg:w-1/2 w-full ">
+                <div className="flex justify-center items-center px-5 lg:py-0 py-24 lg:w-1/2 w-full ">
                     <div className="flex justify-center items-center flex-col gap-8 border-1 border-black py-10 lg:px-24 px-10 text-center rounded-3xl w-[34rem] ">
                         <div className=" flex justify-center items-center flex-col  gap-3">
                             <span className=' font-bold text-3xl'>{type === 'login' ? 'Welcome Back' : 'Registration Now'}</span>
