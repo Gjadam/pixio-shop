@@ -10,7 +10,7 @@ interface IDashboardBox {
 
 export default function DashboardBox({ icon, text, count, bgColor }: IDashboardBox) {
     return (
-        <div className={`relative overflow-hidden flex justify-between items-start flex-col shadow-xl shadow-gray-700 w-96 h-60 p-7 rounded-3xl text-black ${bgColor}`}>
+        <div className={`relative overflow-hidden flex justify-between items-start flex-col shadow-lg hover:shadow-gray-600 w-96 h-60 p-7 rounded-3xl text-black ${bgColor} transition-all duration-300`}>
             <div className="flex justify-between items-center w-full">
                 <div className="rounded-full p-5 bg-[rgba(255,255,255,0.2)]">
                     {icon}
