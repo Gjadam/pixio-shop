@@ -3,17 +3,20 @@ import { useEffect } from 'react'
 export default function Cursor() {
 
     useEffect(() => {
-        const cursorDot: Element | null = document.querySelector('.cursorDot')
-        const cursorOutLine = document.querySelector('.cursorOutLine')
+        const cursorDot: HTMLElement | null = document.querySelector('.cursorDot')
+        const cursorOutLine: HTMLElement | null = document.querySelector('.cursorOutLine')
 
         window.addEventListener('mousemove', (e) => {
             const posx = e.clientX
             const posy = e.clientY
-            cursorDot.style.left = `${posx}px`
-            cursorDot.style.top = `${posy}px`
-
-            cursorOutLine.style.left = `${posx}px`
-            cursorOutLine.style.top = `${posy}px`
+            if (cursorDot !== null) {
+                cursorDot.style.left = `${posx}px`
+                cursorDot.style.top = `${posy}px`
+            }
+            if (cursorOutLine !== null) {
+                cursorOutLine.style.left = `${posx}px`
+                cursorOutLine.style.top = `${posy}px`
+            }
 
             cursorOutLine?.animate({
                 left: `${posx}px`,
