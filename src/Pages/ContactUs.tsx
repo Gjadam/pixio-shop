@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import NavBar from '../Components/Templates/NavBar/NavBar'
 import FormInput from '../Components/Modules/FormInput/FormInput'
 import Button from '../Components/Modules/Button/Button'
@@ -48,7 +48,7 @@ export default function () {
             <NavBar />
             <div className="flex justify-between items-start flex-col-reverse xl:flex-row  container mx-auto w-full xl:px-20 py-16">
                 <div className="flex justify-center items-center xl:items-start flex-col  px-8 w-full">
-                    <div className="flex flex-col gap-10 mb-10">
+                    <div data-aos='fade-right' className="flex flex-col gap-10 mb-10">
                         {
                             branchInfo?.map(info => (
                                 <div>
@@ -80,13 +80,13 @@ export default function () {
                 <div className=" relative w-full">
                     <img src="/images/png/map.png" alt="map" className=' xl:scale-150 xl:translate-x-36  xl:mt-16 select-none z-50' />
                     <label htmlFor="usa" className={`p-1 rounded-full ${selectCountry === 'usa' && 'animate-ping bg-rose-600 p-1.5'} bg-black  absolute left-14 top-14 md:left-20 md:top-24 lg:left-20 lg:top-24 cursor-pointer`}>
-                        <input type="radio" value='usa' id='usa' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
+                        <input type="radio" value='usa' id='usa' placeholder='usa' className=' hidden ' onClick={(e) => setSelectCountry((e.target as HTMLInputElement).value)} />
                     </label>
                     <label htmlFor="rus" className={`p-1 rounded-full ${selectCountry === 'rus' && 'animate-ping bg-rose-600 p-1.5'}  bg-black absolute right-44 top-10 xl:right-0 cursor-pointer`}>
-                        <input type="radio" value='rus' id='rus' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
+                        <input type="radio" value='rus' id='rus' placeholder='rus' className=' hidden ' onClick={(e) => setSelectCountry((e.target as HTMLInputElement).value)} />
                     </label>
                     <label htmlFor="africa" className={`p-1 rounded-full ${selectCountry === 'afr' && 'animate-ping bg-rose-600 p-1.5'}  bg-black absolute right-72 bottom-32 md:right-96 md:bottom-48 lg:right-[35rem] lg:bottom-64 xl:right-36 xl:bottom-32 cursor-pointer`}>
-                        <input type="radio" value='afr' id='africa' className=' hidden ' onClick={(e) => setSelectCountry(e.target.value)} />
+                        <input type="radio" value='afr' id='africa' placeholder='afr' className=' hidden ' onClick={(e) => setSelectCountry((e.target as HTMLInputElement).value)} />
                     </label>
                 </div>
                 <div className="hidden md:block text-center absolute xl:-right-40 right-5 -bottom-32 -z-10 ">

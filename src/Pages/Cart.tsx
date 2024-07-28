@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import NavBar from '../Components/Templates/NavBar/NavBar'
 import Footer from '../Components/Templates/Footer/Footer'
 import CategoryHeader from '../Components/Modules/CategoryHeader/CategoryHeader'
@@ -7,15 +7,42 @@ import ProductTransportation from '../Components/Modules/ProductTransportation/P
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { LuShip } from 'react-icons/lu'
 import { TbTruckDelivery } from 'react-icons/tb'
-import { LiaTimesCircle } from "react-icons/lia";
-import QuantityCounter from '../Components/Modules/QuantityCounter/QuantityCounter'
+import Box from '../Components/Templates/cart/Box'
+
+export interface ICart {
+    id: number;
+    name: string;
+    price: number;
+    images: [{image: string}];
+    counter: number;
+}
 
 export default function Cart() {
+
+    const [cart, setCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        const localCartData = (localStorage.getItem("cart"))
+        const localCart = localCartData ? JSON.parse(localCartData) : []
+        setCart(localCart)
+    }, [])
+
+    useEffect(calcTotalPrice, [cart])
+
+    function calcTotalPrice() {
+        let price = 0;
+        if (cart.length) {
+            price = cart.reduce((prev, current: { price: number, counter: number }) => prev + current.price * current.counter, 0)
+            setTotalPrice(price)
+        }
+    }
+
     return (
         <>
             <NavBar />
             <CategoryHeader path='cart' />
-            <div className="container mx-auto flex justify-center items-start flex-wrap  gap-5 my-20">
+            <div className="container mx-auto flex justify-center items-start flex-wrap  gap-10 my-20">
                 <div className=" w-[50rem] overflow-x-scroll">
                     <div className="relative overflow-x-scroll px-2 ">
                         <table className="w-full">
@@ -24,35 +51,19 @@ export default function Cart() {
                                     <th scope="col" className="text-start px-6 py-4">
                                         Product
                                     </th>
-                                    <th scope="col" className="text-start px-6 py-4">
+                                    <th scope="col" className="text-center px-6 py-4">
                                         Price
                                     </th>
-                                    <th scope="col" className="text-start px-6 py-4">
+                                    <th scope="col" className="text-center px-6 py-4">
                                         Quantity
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr className=" border-y-1 border-stone-300 hover:shadow-lg shadow-secondary transition-shadow duration-500 ">
-                                    <th scope="row" className="flex justify-start items-center gap-3 text-start px-6 py-4">
-                                        <div className=" overflow-hidden min-w-24 max-w-24 min-h-24 max-h-24 rounded-3xl">
-                                            <img src="/images/png/product1.png" alt="product" className=' w-full' />
-                                        </div>
-                                        Apple MacBook Pro 17"
-                                    </th>
-                                    <td className=" px-6 py-4 text-start font-bold text-zinc-600">
-                                        $60
-                                    </td>
-                                    <td className="  py-4 text-start">
-                                        <QuantityCounter />
-                                    </td>
-                                    <td className=" px-6   cursor-pointer">
-                                        <div className=" flex justify-center items-center rounded-full text-black hover:text-rose-600 transition-colors duration-300">
-                                            <LiaTimesCircle className=' text-4xl '/>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            {
+                                cart.map((cart: ICart) => (
+                                    <Box key={cart.id} {...cart} />
+                                ))
+                            }
                         </table>
                     </div>
                 </div>
@@ -77,7 +88,7 @@ export default function Cart() {
                             </div>
                             <div className=" w-full flex justify-between items-center font-bold">
                                 <span>Total</span>
-                                <span className=' text-2xl'>$125.75</span>
+                                <span className=' text-2xl'>${totalPrice}</span>
                             </div>
                             <div className=" text-center mt-5">
                                 <Button padding=' w-full p-2' text='PLACE ORDER' bgColor='black' />
