@@ -1,9 +1,8 @@
-import React from 'react'
 import SpinnerIcon from '../SpinnerIcon/SpinnerIcon'
 import Slider from 'react-infinite-logo-slider'
 export default function Companies() {
     return (
-        <div className=' relative container mx-auto bg-companies-bg w-full rounded-3xl my-28'>
+        <div data-aos='fade-up' className=' relative container mx-auto bg-companies-bg w-full rounded-3xl my-28'>
             <img src="/images/svg/category.svg" alt="icon" className=' hidden md:block absolute left-0 top-0' />
             <div className=" flex justify-around items-center">
                 <div className="">

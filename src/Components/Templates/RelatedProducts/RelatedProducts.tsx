@@ -1,9 +1,8 @@
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader'
-import ProductBox from '../../Modules/ProductBox/ProductBox';
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -23,15 +22,27 @@ export default function RelatedProducts() {
             <div className=" w-full flex justify-center items-center mt-10">
 
                 <Swiper
-                    slidesPerView={4}
+                    breakpoints={{
+                        320: {
+                            slidesPerView: 1,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                        1280: {
+                            slidesPerView: 4,
+                        },
+                    }}
                     loop={true}
                     speed={1000}
-                    grabCursor={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper"
                 >
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                         <div className="flex justify-center">
                         <ProductBox size='lg' />
                         </div>
@@ -70,7 +81,7 @@ export default function RelatedProducts() {
                         <div className="flex justify-center">
                         <ProductBox size='lg' />
                         </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                 </Swiper>
             </div>
         </div>

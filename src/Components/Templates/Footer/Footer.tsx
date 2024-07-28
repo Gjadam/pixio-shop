@@ -1,6 +1,7 @@
 import FormInput from '../../Modules/FormInput/FormInput'
 import FooterLinks from '../../Modules/FooterLinks/FooterLinks'
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <div className=' border-t-1 border-black w-full  pt-20 px-8'>
@@ -71,9 +72,9 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="">
+            <Link to="/contact-us">
               <span className=' text-zinc-600 capitalize hover:text-purple-600 transition-colors duration-300'>Contact Us</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="">
@@ -103,9 +104,9 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="">
+            <Link to="/contact-us">
               <span className=' text-zinc-600 capitalize hover:text-purple-600 transition-colors duration-300'>Contact Us</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="">

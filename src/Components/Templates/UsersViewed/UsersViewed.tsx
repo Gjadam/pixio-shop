@@ -10,11 +10,23 @@ import 'swiper/css/effect-creative';
 
 // import required modules
 import { Autoplay } from 'swiper/modules';
-import ProductBox from '../../Modules/ProductBox/ProductBox';
+import ProductBox, { IProductBox } from '../../Modules/ProductBox/ProductBox';
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProductsFromServer } from '../../../Redux/store/products';
+import { useEffect } from 'react';
+import { AppDispatch, RootState } from '../../../Redux/store';
 
 
 export default function UsersViewed() {
+
+    const dispatch = useDispatch<AppDispatch>()
+    const allProducts = useSelector((state: RootState) => state.products.allProductsData)
+
+    useEffect(() => {
+        dispatch(getAllProductsFromServer())
+    }, [])
+
     return (
         <div className=' container mx-auto flex  justify-evenly items-center xl:items-start xl:flex-row flex-col gap-8 my-28'>
             <div className="">
@@ -39,33 +51,22 @@ export default function UsersViewed() {
                             1024: {
                                 slidesPerView: 2,
                             },
-                            1200: {
-                                slidesPerView: 3,
-                            },
                         }}
                         autoplay={true}
                         freeMode={true}
                         speed={1000}
-                        spaceBetween={30}
+                        spaceBetween={180}
                         centeredSlides={true}
                         modules={[Autoplay]}
                         className="mySwiper"
                     >
+               {
+                    allProducts.slice(0, 6).map((product: IProductBox) => (
                         <SwiperSlide>
-                            <ProductBox />
+                            <ProductBox key={product.id} {...product} />
                         </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductBox />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductBox />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductBox />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductBox />
-                        </SwiperSlide>
+                    ))
+                }
                     </Swiper>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 
 interface ITag {
     keyTag: string;
-    valueTag: string | number;
+    valueTag: string | number | undefined;
 }
 
 export default function Tag({keyTag, valueTag}: ITag) {

@@ -14,23 +14,30 @@ import { FaXTwitter } from "react-icons/fa6";
 import { LuLayoutPanelLeft } from "react-icons/lu";
 import NavBarLinkMobile from '../../Modules/NavBarLinkMobile/NavBarLinkMobile';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfosFromServer, localStorageData, logOutUserAction } from '../../../Redux/store/auth';
-import { ThunkDispatch } from '@reduxjs/toolkit';
+import { getUserInfosFromServer, logOutUserAction } from '../../../Redux/store/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import type { RootState } from '@reduxjs/toolkit/query';
 import NavBarOption from '../../Modules/NavBarOption/NavBarOption';
 import { CgLogOff } from 'react-icons/cg';
 import Modal from '../../Modules/Modal/Modal';
 import ToastAlert from '../../Modules/ToastAlert/ToastAlert';
+import { getAllCollectionsFromServer } from '../../../Redux/store/collections';
+import { AppDispatch, RootState } from '../../../Redux/store';
+
+
+export interface IUser {
+  id: number
+  username: string
+  email: string
+}
+
 export default function NavBar() {
 
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
-  const userDatas = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch<AppDispatch>()
+  const userDatas = useSelector((state: RootState) => state.auth.userInfos as unknown) as IUser | undefined
+  const allCollections = useSelector((state: RootState) => state.collections.allCollections)
   const navigate = useNavigate()
-  const [collections, setCollections] = useState<[]>([])
   const [openStickyNavbar, setOpenStickyNavbar] = useState<boolean>(false)
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false)
-  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false)
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [toastAlertText, setToastAlertText] = useState<string>('')
@@ -46,11 +53,7 @@ export default function NavBar() {
   }, [])
 
   useEffect(() => {
-    fetch(`https://webstorepr.pythonanywhere.com/store/collections/`) // Get all collections
-      .then(res => res.json())
-      .then(allCollections => {
-        setCollections(allCollections)
-      })
+    dispatch(getAllCollectionsFromServer())
   }, [])
 
   useEffect(() => {
@@ -82,8 +85,6 @@ export default function NavBar() {
     navigate('/', { replace: true })
   }
 
-
-
   return (
     <>
       <div className={` py-4  z-[40] border-b-1 transition-all duration-300 ${openStickyNavbar && 'bg-white sticky top-0'} `}>
@@ -95,9 +96,9 @@ export default function NavBar() {
               </Link>
             </div>
             <div className=" hidden lg:flex gap-14">
-              <NavBarLink text={'Shop'} path='/shop' isOpenStickyNavbar={openStickyNavbar} />
-              <NavBarLink text={'Contact Us'} path='/contact-us' isOpenStickyNavbar={openStickyNavbar} />
-              <NavBarLink text={'Collections'} path='' isOpenStickyNavbar={openStickyNavbar} dropDownDatas={collections} />
+              <NavBarLink text={'Shop'} path='/shop' />
+              <NavBarLink text={'Contact Us'} path='/contact-us' />
+              <NavBarLink text={'Collections'} path='' dropDownDatas={allCollections} />
             </div>
           </div>
           <div className=" flex justify-center items-center gap-12">
@@ -113,19 +114,19 @@ export default function NavBar() {
             </div>
             <div className=" flex justify-center items-center gap-5 ">
               {
-                userDatas.userInfos ? (
-                  <div className="relative">
-                    <PiUserCircleThin className=' text-4xl cursor-pointer' onClick={() => setIsOpenDropDown(!isOpenDropDown)} />
-                    <div className={` z-10  absolute right-0 ${openStickyNavbar && 'bg-white'} ${isOpenDropDown ? 'top-14 opacity-100 visible' : 'top-20 opacity-0 invisible'} transition-all duration-500 z-50 overflow-hidden text-zinc-800 ${openStickyNavbar && 'bg-white'}  bg-primary border-b border-b-purple-600 rounded-b-lg shadow-lg`}>
+                userDatas?.id ? (
+                  <div className="relative group">
+                    <PiUserCircleThin className=' text-4xl cursor-pointer ' />
+                    <div className={` z-10  absolute top-full mt-4 right-0 invisible opacity-0 group-hover:opacity-100 group-hover:visible   ${openStickyNavbar && 'bg-white'} transition-all duration-300 z-50 overflow-hidden text-zinc-800 bg-primary border-b border-b-purple-600 rounded-b-lg shadow-lg`}>
                       <div className="flex justify-start items-center gap-2 border-b-1 px-5 py-3">
                         <BiSolidUserCircle className=' text-3xl ' />
                         <div className="flex justify-center items-start flex-col">
-                          <span className='text-sm font-bold'>{userDatas.userInfos?.username}</span>
-                          <span className='text-xs'>{userDatas.userInfos?.email}</span>
+                          <span className='text-sm font-bold'>{userDatas?.username}</span>
+                          <span className='text-xs'>{userDatas?.email}</span>
                         </div>
                       </div>
                       {
-                        userDatas.userInfos?.username === 'admin' ? (
+                        userDatas?.username === 'admin' ? (
                           <Link to='/p-admin'>
                             <NavBarOption title='Admin panel' icon={<LuLayoutPanelLeft className='text-2xl' />} />
                           </Link>
@@ -159,12 +160,13 @@ export default function NavBar() {
       <div className={` lg:hidden fixed top-0 right-0 ${isOpenSideBar ? 'left-0' : 'left-[100rem]'}  bottom-0 z-[60] ${openStickyNavbar ? 'bg-white' : 'bg-primary'} transition-all duration-500`}>
         <div className="p-3   ">
           <div className=" flex justify-between items-center pb-5">
-            <a href="">
+            <Link to="/">
               <img src="/images/svg/logo.svg" className='min-w-36 ' alt="logo" />
-            </a>
+            </Link>
             <LiaTimesCircle className=' hover:text-red-600 transition-colors duration-200 text-4xl cursor-pointer' onClick={() => setIsOpenSideBar(!isOpenSideBar)} />
           </div>
           <div className="">
+            <NavBarLinkMobile text='Cart' path='/cart' />
             <NavBarLinkMobile text='Shop' path='/shop' />
             <NavBarLinkMobile text='Contact Us' path='/contact-us' />
             <NavBarLinkMobile text='Collections' path='' />

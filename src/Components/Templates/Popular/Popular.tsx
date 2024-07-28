@@ -1,11 +1,10 @@
 import SectionHeader from '../../Modules/SectionHeader/SectionHeader'
 import PopularFilterItem from '../../Modules/PopularFilterItem/PopularFilterItem'
-import ProductBox from '../../Modules/ProductBox/ProductBox';
+import ProductBox, { IProductBox } from '../../Modules/ProductBox/ProductBox';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProductsFromServer } from '../../../Redux/store/products';
-import { ThunkDispatch } from '@reduxjs/toolkit';
-import type { RootState } from '@reduxjs/toolkit/query';
+import { AppDispatch, RootState } from '../../../Redux/store';
 
 export type IProducts = [
   {
@@ -22,7 +21,7 @@ export type IProducts = [
 
 export default function Popular() {
 
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+  const dispatch = useDispatch<AppDispatch>()
   const allProducts = useSelector((state: RootState) => state.products.allProductsData)
   
   useEffect(() => {
@@ -45,7 +44,7 @@ export default function Popular() {
       </div>
       <div className=" flex justify-center items-start flex-wrap gap-8 p-12 mx-auto   ">
         {
-          allProducts?.slice(0, 8).map(product => (
+          allProducts?.slice(0, 8).map((product: IProductBox) => (
             <ProductBox size='lg' key={product.id} {...product} />
           ))
         }

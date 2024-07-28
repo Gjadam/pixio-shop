@@ -2,7 +2,7 @@ import Button from '../../Modules/Button/Button'
 
 export default function BannerAdvertise() {
   return (
-    <div className=' flex justify-center items-center md:flex-row flex-col w-full md:h-[30rem] h-[50rem] my-28'>
+    <div  className=' flex justify-center items-center md:flex-row flex-col w-full md:h-[30rem] h-[50rem] my-28'>
         <div className="relative overflow-hidden bg-[url('/images/png/banner1.png')] bg-center  bg-cover h-full w-full md:w-1/2">
             <div className=" absolute  top-36 right-0 lg:right-28">
                 <div className=" flex justify-center items-center flex-col z-10 font-bold relative after:absolute after:bg-[url('/images/svg/shape.svg')] after:bg-no-repeat after:-left-18 after:w-[25rem] after:h-[25rem] after:-z-10">

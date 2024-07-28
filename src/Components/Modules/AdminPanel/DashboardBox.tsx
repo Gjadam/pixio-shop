@@ -3,7 +3,7 @@ import SpinnerIcon from '../SpinnerIcon/SpinnerIcon'
 
 interface IDashboardBox {
     bgColor: string
-    count: string
+    count: string | number
     text: string
     icon: ReactNode
 }

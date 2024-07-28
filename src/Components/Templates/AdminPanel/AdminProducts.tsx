@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react'
 import ToastAlert from '../../Modules/ToastAlert/ToastAlert'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductToServer, getAllProductsFromServer } from '../../../Redux/store/products'
-import { ThunkDispatch } from '@reduxjs/toolkit'
-import { RootState } from '@reduxjs/toolkit/query'
 import { localStorageData } from '../../../Redux/store/auth'
 import Modal from '../../Modules/Modal/Modal'
 import Loader from '../../Modules/Loader/Loader'
 import { getAllCollectionsFromServer } from '../../../Redux/store/collections'
-
+import { AppDispatch, RootState } from '../../../Redux/store'
+import { ICollections } from './AdminCollections'
+import { IProductBox } from '../../Modules/ProductBox/ProductBox'
 export default function AdminProducts() {
 
     const [isOkToastAlert, setIsOkToastAlert] = useState<boolean>(false)
@@ -20,9 +20,9 @@ export default function AdminProducts() {
     const [toastAlertText, setToastAlertText] = useState<string>('')
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [productID, setProductID] = useState<number>()
-    const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+    const dispatch = useDispatch<AppDispatch>()
     const allProducts = useSelector((state: RootState) => state.products)
-    const allCollections = useSelector((state: RootState) => state.collections.allCollections)
+    const allCollections = useSelector((state: RootState) => state.collections.allCollections as unknown) as ICollections[]
 
 
     const [images, setImages] = useState<any>(null)
@@ -98,7 +98,6 @@ export default function AdminProducts() {
     const openDeleteProductModal = async (productId: number) => {
         setIsOpenModal(true);
         setProductID(productId)
-
     }
 
     const closeModal = () => {
@@ -161,6 +160,8 @@ export default function AdminProducts() {
                             </div>
                         </div>
                     </div>
+                 {
+                    allProducts.allProductsData ? (
                     <div className="relative overflow-auto shadow-lg w-full shadow-gray-600 rounded-lg border-1 border-primary mb-24 ">
                         <table className="w-full text-sm  rtl:text-right text-primary text-center ">
                             <thead className="text-xs uppercase  border-b  border-primary">
@@ -179,9 +180,6 @@ export default function AdminProducts() {
                                         price with tax
                                     </th>
                                     <th scope="col" className="px-6 py-3 ">
-                                        inventory
-                                    </th>
-                                    <th scope="col" className="px-6 py-3 ">
                                         collection
                                     </th>
                                     <th scope="col" className="px-6 py-3 ">
@@ -192,7 +190,7 @@ export default function AdminProducts() {
                             <tbody>
                                 {
                                     allProducts.allProductsData &&
-                                    allProducts.allProductsData?.map((product) => (
+                                    allProducts.allProductsData?.map((product: IProductBox) => (
                                         <ProductTable key={product.id} {...product} openDeleteProductModal={openDeleteProductModal} />
                                     ))
                                 }
@@ -200,6 +198,11 @@ export default function AdminProducts() {
                             </tbody>
                         </table>
                     </div>
+
+                    ) : (
+                        <Loader fullWithLoader={true}/>
+                    )
+                 }
                 </div>
             </div>
             <Modal closeModal={closeModal} confirmModal={confirmModal} isOpen={isOpenModal} text="Are you sure you want to log out?" />

@@ -11,7 +11,7 @@ export default function Advertise() {
                     <Button text={'Women collection'} padding='px-5 py-3' bgColor={'white'} />
                 </div>
             </div>
-            <div className=" flex justify-center lg:items-center items-start flex-col gap-6 lg:p-0 p-5  ">
+            <div data-aos='fade-left' className=" flex justify-center lg:items-center items-start flex-col gap-6 lg:p-0 p-5  ">
                 <div className=" flex justify-center items-start flex-col gap-3 pt-5">
                     <span className=' font-bold text-3xl max-w-[30rem]'>Set Your Wardrobe With Our Amazing Selection!</span>
                     <span className=' max-w-[35rem] text-lg'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</span>

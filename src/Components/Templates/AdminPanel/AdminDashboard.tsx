@@ -5,6 +5,11 @@ import DashBoardTable from '../../Modules/AdminPanel/DashBoardTable'
 import { PiUsersDuotone } from 'react-icons/pi'
 import { FiShoppingBag } from 'react-icons/fi'
 import { IoPricetagOutline } from 'react-icons/io5'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllUsersFromServer } from '../../../Redux/store/users'
+import { IAdminUsers } from './AdminUsers'
+import { AppDispatch, RootState } from '../../../Redux/store'
 
 
 const data = [
@@ -54,10 +59,19 @@ const data = [
 
 
 export default function AdminDashboard() {
+    const dispatch = useDispatch<AppDispatch>()
+
+    const allUsers = useSelector((state: RootState) => state.users)
+
+    useEffect(() => {
+        dispatch(getAllUsersFromServer())
+    }, [])
+
+
     return (
         <div className='container mx-auto p-10'>
             <div className="flex justify-evenly items-center flex-wrap gap-5 mb-10">
-                <DashboardBox text='All Users' count='265' bgColor='bg-sky-300' icon={<PiUsersDuotone className=' text-3xl' />} />
+                <DashboardBox text='All Users' count={allUsers.length} bgColor='bg-sky-300' icon={<PiUsersDuotone className=' text-3xl' />} />
                 <DashboardBox text='All Products' count='500' bgColor='bg-violet-300' icon={<FiShoppingBag className=' text-3xl' />} />
                 <DashboardBox text='Products sold' count='265' bgColor='bg-teal-300' icon={<IoPricetagOutline className=' text-3xl' />} />
             </div>
@@ -95,7 +109,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className=" mb-10 text-white w-full">
                     <div className=" mb-10 ">
-                        <SectionHeader text='Recent Users' />
+                        <SectionHeader text='Recent customers' />
                     </div>
                     <div className="relative overflow-auto shadow-lg w-full shadow-gray-600 rounded-lg border-1 border-primary ">
                         <table className="w-full text-sm  rtl:text-right text-primary text-center ">
@@ -113,12 +127,11 @@ export default function AdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <DashBoardTable id={1} username='mohammad javad babaei' email='javad@gmail.com' />
-                                <DashBoardTable id={2} username='ali rahmani' email='ali@gmail.com' />
-                                <DashBoardTable id={2} username='ali rahmani' email='ali@gmail.com' />
-                                <DashBoardTable id={2} username='ali rahmani' email='ali@gmail.com' />
-                                <DashBoardTable id={2} username='ali rahmani' email='ali@gmail.com' />
-                                <DashBoardTable id={2} username='ali rahmani' email='ali@gmail.com' />
+                                {
+                                    allUsers.slice(0, 10).reverse().map((user: IAdminUsers, index: number) => (
+                                        <DashBoardTable key={user.id} userID={index+1} {...user} />
+                                    ))
+                                }
                             </tbody>
                         </table>
                     </div>

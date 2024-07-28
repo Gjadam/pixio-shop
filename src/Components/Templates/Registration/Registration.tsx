@@ -5,11 +5,11 @@ import Button from '../../Modules/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../Footer/Footer'
 import NavBar from '../NavBar/NavBar'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ToastAlert from '../../Modules/ToastAlert/ToastAlert'
 import { useDispatch } from 'react-redux'
-import { ThunkDispatch } from '@reduxjs/toolkit'
 import { loginUserAction, registerUserAction } from '../../../Redux/store/auth'
+import { AppDispatch } from '../../../Redux/store'
 
 interface IRegistration {
     type: string
@@ -25,7 +25,7 @@ export default function Registration({ type }: IRegistration) {
     const [openToastAlert, setOpenToastAlert] = useState<boolean>(false)
     const [isToastAlertOK, setIsToastAlertOK] = useState<boolean>(false)
 
-    const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
     const firstNameOnChange = (e) => {

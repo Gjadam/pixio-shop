@@ -35,27 +35,25 @@ export default function Sponsored() {
                 }}
                     loop={true}
                     speed={1000}
-                    grabCursor={true}
-                    slidesPerView={4}
                     className="mySwiper"
                 >
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored1.jpg' logoUrl='/images/png/sponsored1.png' title='Modern Jewellery' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored2.jpg' logoUrl='/images/png/sponsored2.png' title='Outdoor Shoes' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored3.jpg' logoUrl='/images/png/sponsored3.png' title='Best Cloths' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored1.jpg' logoUrl='/images/png/sponsored1.png' title='Modern Jewellery' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored2.jpg' logoUrl='/images/png/sponsored2.png' title='Outdoor Shoes' />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <SponsoredBox />
+                        <SponsoredBox bgUrl='/images/jpg/bg-sponsored3.jpg' logoUrl='/images/png/sponsored3.png' title='Best Cloths' />
                     </SwiperSlide>
                 </Swiper>
             </div>
