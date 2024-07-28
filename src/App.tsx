@@ -1,17 +1,18 @@
 import './App.css'
 import { useRoutes } from 'react-router-dom'
 import routes from './routes'
-import NavBar from './Components/Templates/NavBar/NavBar'
-import Footer from './Components/Templates/Footer/Footer'
-
+import store from './Redux/store'
+import { Provider } from 'react-redux'
+import Cursor from './Components/Modules/Cursor/Cursor'
+import AOSInit from './utils/aos'
 function App() {
   const router = useRoutes(routes)
   return (
-    <>
-      <NavBar />
+    <Provider store={store}>
+      <Cursor />
+      <AOSInit />
       {router}
-      <Footer />
-    </>
+    </Provider>
   )
 }
 
