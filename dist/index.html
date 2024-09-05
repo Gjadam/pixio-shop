@@ -1,14 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/png/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PiXiO</title>
-    <script type="module" crossorigin src="/assets/index-DxfzCyd8.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DbD8UpFB.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/images/png/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PiXiO</title>
+  <script type="module" crossorigin src="/assets/index-JpYFUUg6.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CCnho0hf.css">
+</head>
+
+<body class=" overflow-hidden">
+  <div class="loader-page flex justify-center items-center">
+    <img src="/images/gif/loading.gif" alt="loading">
+  </div>
+  <!-- End Loader Page -->
+  <div id="root"></div>
+  <script>
+    window.addEventListener('load', () => {
+      document.body.classList.remove('overflow-hidden')
+      document.querySelector('.loader-page').classList.add('hidden')
+    })
+  </script>
+</body>
+
 </html>
