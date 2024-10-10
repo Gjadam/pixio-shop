@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { getAllProductsFromServer } from "../../../Redux/store/products";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { IProductBox } from "../../Modules/ProductBox/ProductBox";
+import Loader from "../../Modules/Loader/Loader";
 
 export default function Header() {
 
@@ -43,11 +44,19 @@ export default function Header() {
                 className="mySwiper3"
             >
                 {
-                    allProducts.slice(0, 6).map((product: IProductBox) => (
-                        <SwiperSlide>
-                            <HeaderProductBox key={product.id} {...product} />
-                        </SwiperSlide>
-                    ))
+                    allProducts.length > 0 ? (
+                        allProducts.slice(0, 6).map((product: IProductBox) => (
+                            <SwiperSlide>
+                                <HeaderProductBox key={product.id} {...product} />
+                            </SwiperSlide>
+                        ))
+
+                    ) : (
+                        <div className="">
+                            
+                        </div>
+                            // <Loader />
+                    )
                 }
             </Swiper>
             <div className="flex justify-center items-center  z-20 absolute left-5 lg:left-32 lg:bottom-0">

@@ -37,6 +37,7 @@ import { localStorageData } from '../Redux/store/auth';
 import { AppDispatch, RootState } from '../Redux/store';
 import Alert from '../Components/Modules/Alert/Alert';
 import toastAlert from '../utils/toastAlert';
+import ToastAlert from '../Components/Modules/ToastAlert/ToastAlert';
 
 export interface SingleCollection {
     title: string | number
@@ -48,7 +49,9 @@ export default function ProductDetail() {
 
     const [productDetails, setProductDetails] = useState<IProductBox>()
     const [allComments, setAllComments] = useState([])
-
+    const [isOpenToastAlert, setIsOpenToastAlert] = useState(false)
+    const [isOkToastAlert, setIsOkToastAlert] = useState(false)
+    const [toastAlertText, setToastAlertText] = useState("")
     const dispatch = useDispatch<AppDispatch>()
     const singleCollection = useSelector((state: RootState) => state.collections.singleCollection as unknown) as SingleCollection | undefined
 
@@ -73,7 +76,7 @@ export default function ProductDetail() {
 
         window.scrollTo(0, 0)
 
-        fetch(`https://webstorepr.pythonanywhere.com/store/products/${productID}`)
+        fetch(`https://myecommerceapi.pythonanywhere.com/store/products/${productID}`)
             .then(res => res.json())
             .then(productData => {
                 setProductDetails(productData)
@@ -84,7 +87,7 @@ export default function ProductDetail() {
         }
 
         const getComments = async () => {
-            const res = await fetch(`https://webstorepr.pythonanywhere.com/store/products/${productID}/reviews/`)
+            const res = await fetch(`https://myecommerceapi.pythonanywhere.com/store/products/${productID}/reviews/`)
             if (res.status === 200) {
                 const data = await res.json()
                 setAllComments(data)
@@ -147,15 +150,13 @@ export default function ProductDetail() {
         }
     };
 
-    console.log(productDetails?.images);
-
-
     const addComment = async () => {
         const comment = {
             name,
             description,
         }
-        const res = await fetch(`https://webstorepr.pythonanywhere.com/store/products/${productID}/reviews/`, {
+
+        const res = await fetch(`https://myecommerceapi.pythonanywhere.com/store/products/${productID}/reviews/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -163,20 +164,29 @@ export default function ProductDetail() {
             },
             body: JSON.stringify(comment)
         })
+        console.log(res);
+
         if (res.status === 201) {
-            toastAlert.fire({
-                text: "Your comment has been registered successfully.",
-                icon: "success"
-            })
+            setIsOpenToastAlert(true)
+            setIsOkToastAlert(true)
+            setToastAlertText("Your comment has been registered successfully.")
+            setTimeout(() => {
+                setIsOpenToastAlert(false)
+            }, 3000);
+        } else if (res.status === 401) {
+            setIsOpenToastAlert(true)
+            setIsOkToastAlert(false)
+            setToastAlertText("Please login first")
+            setTimeout(() => {
+                setIsOpenToastAlert(false)
+            }, 3000);
         }
-
-
     }
 
     return (
         <>
             <NavBar />
-            <div className=" px-20">
+            <div className=" container mx-auto px-5">
                 <div className="flex justify-start items-start mt-5">
                     <BreadCrumb path='product details' />
                 </div>
@@ -332,6 +342,7 @@ export default function ProductDetail() {
                 </div>
             </div>
             <Footer />
+            <ToastAlert isOk={isOkToastAlert} isOpen={isOpenToastAlert} text={toastAlertText} />
         </>
     )
 }

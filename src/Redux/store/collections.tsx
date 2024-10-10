@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const getAllCollectionsFromServer = createAsyncThunk(
     "collections/getAllCollectionsFromServer",
     async () => {
-        const collectionsFetch = await fetch(`https://webstorepr.pythonanywhere.com/store/collections/`)
+        const collectionsFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/store/collections/`)
         const collectionsData = await collectionsFetch.json()
         return collectionsData
     }
@@ -12,7 +12,7 @@ export const getAllCollectionsFromServer = createAsyncThunk(
 export const getSingleCollectionFromServer = createAsyncThunk(
     "collections/getSingleCollectionFromServer",
     async (collectionID: number) => {
-        const singleCollectionsFetch = await fetch(`https://webstorepr.pythonanywhere.com/store/collections/${collectionID}`)
+        const singleCollectionsFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/store/collections/${collectionID}`)
         const singleCollectionsData = await singleCollectionsFetch.json()
         return singleCollectionsData
     }

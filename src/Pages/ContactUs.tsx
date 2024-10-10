@@ -46,7 +46,7 @@ export default function () {
     return (
         <>
             <NavBar />
-            <div className="flex justify-between items-start flex-col-reverse xl:flex-row  container mx-auto w-full xl:px-20 py-16">
+            <div className=" flex justify-between items-start flex-col-reverse xl:flex-row  container mx-auto w-full xl:px-20 py-16">
                 <div className="flex justify-center items-center xl:items-start flex-col  px-8 w-full">
                     <div data-aos='fade-right' className="flex flex-col gap-10 mb-10">
                         {
@@ -57,7 +57,7 @@ export default function () {
                                 </div>
                             ))
                         }
-                        <div className="flex justify-between w-96 items-start">
+                        <div className="flex justify-between items-start flex-wrap gap-5">
                             <div className=" flex flex-col">
                                 <span className='text-2xl  font-bold'>Call Us</span>
                                 <span>+01-123-456-7890</span>
@@ -69,7 +69,7 @@ export default function () {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-5 bg-zinc-900 text-white p-12 w-[30rem] rounded-3xl">
+                    <div className="flex flex-col gap-5 bg-zinc-900 text-white p-12 w-full  xl:w-[30rem]  rounded-3xl">
                         <FormInput placeholder='your name' type='text' label='Your Name' />
                         <FormInput placeholder='email address' type='email' label='Email Address' />
                         <FormInput placeholder='phone number' type='number' label='Phone Number' />

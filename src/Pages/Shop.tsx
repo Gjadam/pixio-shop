@@ -63,7 +63,7 @@ export default function Shop() {
             <NavBar />
             <TopUp />
             <CategoryHeader path='shop' />
-            <div className=" relative flex justify-between items-start px-28 py-10">
+            <div className=" container mx-auto px-10 relative flex justify-between items-start  py-10">
                 <div className={` lg:flex  gap-8 lg:w-96 fixed ${isOpenFilter ? '-bottom-[20.7rem]' : '-bottom-0'}  right-0 left-0 border-t-1 lg:border-0  border-black rounded-t-3xl p-5 lg:p-0 z-50 w-full lg:bg-primary bg-white lg:sticky lg:top-24 transition-all duration-500 `}>
                     <div className=" flex justify-center items-center lg:items-start flex-col gap-10 w-full">
                         <div className="flex items-start flex-col w-full ">

@@ -16,7 +16,7 @@ interface IAddProduct {
 export const getAllProductsFromServer = createAsyncThunk(
     'products/getAllProductsFromServer',
     async () => {
-        const productsFetch = await fetch(`https://webstorepr.pythonanywhere.com/store/products`, {
+        const productsFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/store/products`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -30,7 +30,7 @@ export const addProductToServer = createAsyncThunk(
     'products/addProductToServer',
     async (newProduct: IAddProduct) => {
 
-        const newProductFetch = await fetch(`https://webstorepr.pythonanywhere.com/store/products/`, {
+        const newProductFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/store/products/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const addProductToServer = createAsyncThunk(
         })
         const newProductData = await newProductFetch.json()
         
-        const newProductImageFetch = await fetch(`https://webstorepr.pythonanywhere.com/store/products/${newProductData.id}/images/`, {
+        const newProductImageFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/store/products/${newProductData.id}/images/`, {
             method: "POST",
             headers: {
                 'Authorization': `JWT ${localStorageData}`

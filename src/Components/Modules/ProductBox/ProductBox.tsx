@@ -8,9 +8,6 @@ import UnitPrice from '../UnitPrice/UnitPrice';
 import DiscountedPrice from '../DiscountedPrice/DiscountedPrice';
 import Tag from '../Tag/Tag';
 import Loader from '../Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../Redux/store';
-import { getSingleCollectionFromServer } from '../../../Redux/store/collections';
 import { ICollections } from '../../Templates/AdminPanel/AdminCollections';
 export interface IProductBox {
     collection: number
@@ -37,7 +34,7 @@ export default function ProductBox({ id, size, title, unit_price, price_with_tax
 
     useEffect(() => {
         const getSingleCollection = async () => {
-            const res = await fetch(`https://webstorepr.pythonanywhere.com/store/collections/${collection}`)
+            const res = await fetch(`https://myecommerceapi.pythonanywhere.com/store/collections/${collection}`)
             if (res.ok) {
                 const data = await res.json()
                 setSingleCollection(data)

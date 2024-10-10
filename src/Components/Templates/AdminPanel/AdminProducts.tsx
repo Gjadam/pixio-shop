@@ -107,7 +107,7 @@ export default function AdminProducts() {
     const confirmModal = () => {
         setIsOpenModal(false);
 
-        fetch(`https://webstorepr.pythonanywhere.com/store/products/${productID}`, {
+        fetch(`https://myecommerceapi.pythonanywhere.com/store/products/${productID}`, {
             method: "DELETE",
             headers: {
                 'Authorization': `JWT ${localStorageData}`

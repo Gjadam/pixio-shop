@@ -5,7 +5,7 @@ export const getAllUsersFromServer = createAsyncThunk(
     'User/getAllUsersFromServer',
     async () => {
         if (localStorageData) {
-            return fetch(`https://webstorepr.pythonanywhere.com/auth/users/`, {
+            return fetch(`https://myecommerceapi.pythonanywhere.com/auth/users/`, {
                 headers: {
                     'Authorization': `JWT ${localStorageData}`
                 }

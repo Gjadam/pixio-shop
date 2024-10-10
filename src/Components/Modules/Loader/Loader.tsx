@@ -7,8 +7,8 @@ interface ILoader {
 export default function Loader({ fullWithLoader }: ILoader) {
   return (
     fullWithLoader ? (
-      <div className=' flex justify-center items-center flex-col fixed left-0 top-0 right-0 bottom-0 bg-zinc-950 bg-opacity-80 z-[999]'>
-        <TbLoader3 className=' text-9xl text-purple-300 animate-spin' />
+      <div className=' flex justify-center items-center flex-col fixed left-0 top-0 right-0 bottom-0 bg-zinc-50 bg-opacity-80 z-[999]'>
+         <img src="/images/gif/loading.gif" alt="loading"/>
         <span className=' animate-pulse text-white text-xl'>Please wait</span>
       </div>
     ) : (

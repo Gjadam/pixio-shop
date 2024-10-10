@@ -40,7 +40,7 @@ export default function AdminCollections() {
     }
 
     const addNewCollection = () => {
-        fetch(`https://webstorepr.pythonanywhere.com/store/collections/`, {
+        fetch(`https://myecommerceapi.pythonanywhere.com/store/collections/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function AdminCollections() {
     const confirmModal = () => {
         setIsOpenModal(false);
 
-        fetch(`https://webstorepr.pythonanywhere.com/store/collections/${collectionID}/`, {
+        fetch(`https://myecommerceapi.pythonanywhere.com/store/collections/${collectionID}/`, {
             method: "DELETE",
             headers: {
                 'Authorization': `JWT ${localStorageData}`

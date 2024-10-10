@@ -6,7 +6,7 @@ export const localStorageData = userLocalStorage && JSON.parse(userLocalStorage)
 export const getUserInfosFromServer = createAsyncThunk(
     'User/getUserInfosFromServer',
     async () => {
-        const userFetch = await fetch(`https://webstorepr.pythonanywhere.com/auth/users/me/`, {
+        const userFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/auth/users/me/`, {
             headers: {
                 'Authorization': `JWT ${localStorageData}`
             }
@@ -19,14 +19,14 @@ export const getUserInfosFromServer = createAsyncThunk(
 export const registerUserAction = createAsyncThunk(
     'User/registerUserAction',
     async (newUserInfo: { username: string, password: string }) => {
-        const registerUserFetch = await fetch(`https://webstorepr.pythonanywhere.com/auth/users/`, {
+        const registerUserFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/auth/users/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newUserInfo),
         })
-        const tokenFetch = await fetch(`https://webstorepr.pythonanywhere.com/auth/jwt/create/`, {
+        const tokenFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/auth/jwt/create/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export const registerUserAction = createAsyncThunk(
 export const loginUserAction = createAsyncThunk(
     'User/loginUserAction',
     async (newUserInfoForGetToken: { username: string, password: string }) => {
-        const tokenFetch = await fetch(`https://webstorepr.pythonanywhere.com/auth/jwt/create/`, {
+        const tokenFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/auth/jwt/create/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -55,14 +55,16 @@ export const loginUserAction = createAsyncThunk(
         })
 
         const tokenData = await tokenFetch.json()
-        localStorage.setItem('user', JSON.stringify(tokenData.access))
-        const userFetch = await fetch(`https://webstorepr.pythonanywhere.com/auth/users/me/`, {
-            headers: {
-                'Authorization': `JWT ${tokenData.access}`
-            }
-        })
-        const userData = userFetch.json()
-        return userData
+        if(tokenData) {
+            localStorage.setItem('user', JSON.stringify(tokenData.access))
+            const userFetch = await fetch(`https://myecommerceapi.pythonanywhere.com/auth/users/me/`, {
+                headers: {
+                    'Authorization': `JWT ${tokenData.access}`
+                }
+            })
+            const userData = userFetch.json()
+            return userData
+        }
     }
 )
 
